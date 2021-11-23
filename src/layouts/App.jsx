@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 
-import CompsNavbar from '@/components/Navbar'
+import CompsSearchbar from '@/components/Navbar'
+import Searchbar from '@/components/Searchbar'
 import CompsFooter from '@/components/Footer'
 
 import PagesHome from '@/pages/Home'
@@ -10,7 +11,8 @@ import PagesNotFound from '@/pages/NotFound'
 
 const App = () => (
   <Router>
-    <CompsNavbar />
+    <CompsSearchbar />
+    <Searchbar />
     <Switch>
       <Route exact path="/" component={PagesHome} />
       <Route exact path="/another" component={PagesAnother} />

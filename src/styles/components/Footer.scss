@@ -10,9 +10,22 @@
     padding: 1px;
   }
 
+  .list-group-item:first-child {
+    text-decoration: underline;
+  }
+
+  .list-group-item:not(:first-child) {
+    font-weight: 100;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .list-group-item:not(:first-child):hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
 
   #logo {
-    font-size: 32px;
+    font-size: 25px;
   }
 
   .fa-instagram-square {
