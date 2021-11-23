@@ -3,6 +3,7 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 
 import CompsSearchbar from '@/components/Navbar'
 import Searchbar from '@/components/Searchbar'
+import CompsCategorybar from '@/components/Category'
 import CompsFooter from '@/components/Footer'
 
 import PagesHome from '@/pages/Home'
@@ -13,6 +14,7 @@ const App = () => (
   <Router>
     <CompsSearchbar />
     <Searchbar />
+    <CompsCategorybar />
     <Switch>
       <Route exact path="/" component={PagesHome} />
       <Route exact path="/another" component={PagesAnother} />
