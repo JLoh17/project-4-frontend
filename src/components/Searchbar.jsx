@@ -1,9 +1,11 @@
 import React from 'react'
 
 const CompsSearchbar = () => (
-  <div id="searchbar" className="mx-auto d-flex my-4 col-md-9">
-    <input className="form-control" type="search" placeholder="Search entire store here..." aria-label="Search" />
-    <button className="btn btn-outline-success" type="submit">Search</button>
+  <div id="searchbar">
+    <div className="d-flex mx-auto p-3 col-md-9 search ">
+      <input className="form-control" type="search" placeholder="Search entire store here..." aria-label="Search" />
+      <button className="btn btn-dark" type="submit">Search</button>
+    </div>
   </div>
 )
 
