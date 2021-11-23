@@ -5,15 +5,19 @@ const CompsFooter = () => (
     <div className="container-fluid d-flex justify-content-between">
 
       <div>
-        <h5>About</h5>
-        <h6>About us</h6>
-        <h6>Contact us</h6>
+        <ul className="list-group">
+          <li className="list-group-item">About</li>
+          <li className="list-group-item">About us</li>
+          <li className="list-group-item">Contact us</li>
+        </ul>
       </div>
 
       <div>
-        <h5>About</h5>
-        <h6>About us</h6>
-        <h6>Contact us</h6>
+        <ul className="list-group">
+          <li className="list-group-item">Customer Service</li>
+          <li className="list-group-item">FAQ</li>
+          <li className="list-group-item">T&C</li>
+        </ul>
       </div>
 
       <div>
