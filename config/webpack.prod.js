@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -32,6 +33,9 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
+      }, {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+        loader: 'url-loader?limit=100000'
       }
     ]
   },
@@ -54,6 +58,9 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_DOMAIN': JSON.stringify('https://fth-back.herokuapp.com') // TODO
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/template.html'),
       filename: 'index.html'
