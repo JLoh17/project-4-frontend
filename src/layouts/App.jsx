@@ -1,44 +1,72 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getMyProfile } from '@/actions/my/profile'
 
-import CompsSearchbar from '@/components/Navbar'
+import LayoutsNavbar from '@/components/Navbar'
 import Searchbar from '@/components/Searchbar'
 import CompsCategorybar from '@/components/Category'
 import CompsFooter from '@/components/Footer'
+import CompLoading from '@/components/Loading'
 
 import PagesHome from '@/pages/Home'
-import PagesAnother from '@/pages/Another'
 import PagesNotFound from '@/pages/NotFound'
 
-const App = () => (
-  <Router>
-    <CompsSearchbar />
-    <Searchbar />
-    <CompsCategorybar />
-    <Switch>
-      <Route exact path="/" component={PagesHome} />
-      <Route exact path="/another" component={PagesAnother} />
+const App = (props) => {
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => {
+    props.getMyProfile().finally(() => {
+      setLoaded(true)
+    })
+  })
 
-      {/* <Route exact path="/products" component={ProductIndex} /> // Product Index */}
-      {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
+  return (
+    <Router>
+      {
+        loaded ? (
+          <>
+            <LayoutsNavbar />
+            <Searchbar />
+            <CompsCategorybar />
+            <Switch>
+              <Route exact path="/" component={PagesHome} />
 
-      {/* <Route exact path="/another" component={MyCart} /> // MyCart */}
-      {/* <Route exact path="/another" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
-      {/* <Route exact path="/another" component={MyOrdersShow} /> // Payment */}
-      {/* <Route exact path="/another" component={MyOrdersIndex} /> // MyOrdersIndex */}
-      {/* <Route exact path="/another" component={PagesAnother} /> // MyOrderShow */}
+              {/* <Route exact path="/products" component={ProductIndex} /> // Product Index */}
+              {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
 
-      {/* <Route exact path="/another" component={MyProfile} /> // MyProfile */}
-      {/* <Route exact path="/another" component={MyPointBalance} /> // MyPointBalance */}
-      {/* <Route exact path="/another" component={MyWishlist} /> // MyWishlist */}
+              {/* <Route exact path="/another" component={MyCart} /> // MyCart */}
+              {/* <Route exact path="/another" component={MyOrdersIndex} /> // MyOrdersIndex */}
+              {/* <Route exact path="/another" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
+              {/* <Route exact path="/another" component={MyOrdersShow} /> // Payment */}
 
-      {/* <Route exact path="/another" component={AdminOrders} /> // AdminOrders */}
-      {/* <Route exact path="/another" component={AdminIndex} /> // AdminIndex */}
+              {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
+              {/* <Route exact path="/my/pointbalance" component={MyPointBalance} /> // MyPointBalance */}
+              {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
-      <Route component={PagesNotFound} />
-    </Switch>
-    <CompsFooter />
-  </Router>
-)
+              {/* <Route exact path="/admin/orders" component={AdminOrders} /> // AdminOrders */}
+              {/* <Route exact path="/admin" component={AdminIndex} /> // AdminIndex */}
 
-export default App
+              <Route component={PagesNotFound} />
+            </Switch>
+            <CompsFooter />
+          </>
+        ) : (
+          <div className="container my-3">
+            <CompLoading />
+          </div>
+        )
+      }
+    </Router>
+  )
+}
+
+App.propTypes = {
+  getMyProfile: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = {
+  getMyProfile
+}
+
+export default connect(null, mapDispatchToProps)(App)
