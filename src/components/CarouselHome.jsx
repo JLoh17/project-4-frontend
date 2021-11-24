@@ -65,10 +65,12 @@ const CarouselHome = () => {
       <Carousel cols={5} loop className="p-3">
         {cards.map((val) => (
           <Carousel.Item key={val.id}>
-            <div className="text-center">
-              <img width="60%" src={val.src} />
-              <h5>{val.title}</h5>
-              <span className="flex-grow-1 row-reverse">{val.price}</span>
+            <div className="card my-3 mx-auto" style={{ width: '15rem' }}>
+              <img src={val.src} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{val.title}</h5>
+                <p className="card-text">{val.price}</p>
+              </div>
             </div>
           </Carousel.Item>
         ))}

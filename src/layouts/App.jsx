@@ -11,6 +11,8 @@ import CompsFooter from '@/components/Footer'
 import CompLoading from '@/components/Loading'
 
 import PagesHome from '@/pages/Home'
+import AdminOrders from '@/pages/admin/orders'
+
 import PagesNotFound from '@/pages/NotFound'
 
 const App = (props) => {
@@ -44,7 +46,7 @@ const App = (props) => {
               {/* <Route exact path="/my/pointbalance" component={MyPointBalance} /> // MyPointBalance */}
               {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
-              {/* <Route exact path="/admin/orders" component={AdminOrders} /> // AdminOrders */}
+              <Route exact path="/admin/orders" component={AdminOrders} />
               {/* <Route exact path="/admin" component={AdminIndex} /> // AdminIndex */}
 
               <Route component={PagesNotFound} />

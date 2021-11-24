@@ -6,9 +6,13 @@
 @import "./pages/PagesNotFound.scss";
 
 
-
-
 @import "./components/Navbar.scss";
 @import "./components/Searchbar.scss";
 @import "./components/Categorybar.scss";
 @import "./components/Footer.scss";
+
+@import "./ResponsiveTable.scss";
+
+body {
+  background: whitesmoke;
+}
