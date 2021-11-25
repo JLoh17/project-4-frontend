@@ -1,31 +1,37 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
+import Button from 'react-bootstrap/Button'
 
 const MyCart = () => {
   useState()
 
   const TestOrders = [
     {
+      id: '1',
       imageURL: 'https://images.hktv-img.com/images/HKTV/16493/LOG_MXMASTER3_BLK_main_53009919_20201029171358_01_1200.jpg',
       quantity: '1',
       product:
         { productName: 'some title',
           price: '100' }
     }, {
+      id: '2',
       imageURL: 'https://images.hktv-img.com/images/HKTV/12752/339481_main_74712191_20211005152223_01_1200.jpg',
       quantity: '1',
       product:
         { productName: 'some title',
           price: '200' }
     }, {
+      id: '3',
       imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg',
       quantity: '1',
       product:
         { productName: 'some title',
           price: '300' }
     }, {
+      id: '4',
       imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg',
       quantity: '1',
       product:
@@ -52,7 +58,7 @@ const MyCart = () => {
           {
             // TODO
             TestOrders.map((order) => (
-              <Tr>
+              <Tr key={order.id}>
                 <Td><Image src={order.imageURL} className="pic-resize" />{order.src}</Td>
                 <Td>{order.product.productName}</Td>
                 <Td>${order.product.price}</Td>
@@ -80,6 +86,13 @@ const MyCart = () => {
             }
         </Tbody>
       </Table>
+      <div className="d-flex justify-content-end my-3">
+        <h4>Total:</h4>
+        <h4>$xxx</h4>
+        <Link to="/my/orders/new">
+          <Button variant="success"> Next Step </Button>
+        </Link>
+      </div>
     </div>
 
   )

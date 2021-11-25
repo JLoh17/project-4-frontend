@@ -87,7 +87,7 @@ class LayoutsNavbar extends React.Component {
     if (currentUser) {
       return (
         <>
-          <Nav className="ml-auto">
+          <Nav className="ml-auto dropdown-box">
             <NavDropdown
               alignRight
               title={(

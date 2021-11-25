@@ -9,4 +9,8 @@
   .list-group-item:not(:first-child):hover {
     color: rgba(255, 255, 255, 0.5);
   }
+
+  .dropdown-box {
+    z-index: 999;
+  }
 }

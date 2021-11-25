@@ -30,7 +30,8 @@ const App = (props) => {
         loaded ? (
           <>
             <LayoutsNavbar />
-            <div className="sticky-top">
+            {/* temporary fix; to merge searchbar and categorybar together */}
+            <div className="sticky-top stickybar">
               <Searchbar />
               <CompsCategorybar />
             </div>
