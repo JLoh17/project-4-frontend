@@ -37,10 +37,10 @@ const App = (props) => {
               {/* <Route exact path="/products" component={ProductIndex} /> // Product Index */}
               {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
 
-              {/* <Route exact path="/another" component={MyCart} /> // MyCart */}
-              {/* <Route exact path="/another" component={MyOrdersIndex} /> // MyOrdersIndex */}
-              {/* <Route exact path="/another" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
-              {/* <Route exact path="/another" component={MyOrdersShow} /> // Payment */}
+              {/* <Route exact path="/my/cart" component={MyCart} /> // MyCart */}
+              {/* <Route exact path="/my/orders" component={MyOrdersIndex} /> // MyOrdersIndex */}
+              {/* <Route exact path="/my/delivery" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
+              {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
 
               {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
               {/* <Route exact path="/my/pointbalance" component={MyPointBalance} /> // MyPointBalance */}
