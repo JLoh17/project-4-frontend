@@ -13,6 +13,7 @@ import CompLoading from '@/components/Loading'
 import PagesHome from '@/pages/Home'
 import MyCart from '@/pages/my/Cart'
 import MyPointBalance from '@/pages/my/Pointbalance'
+import MyOrdersIndex from '@/pages/my/orders/Index'
 import AdminOrders from '@/pages/admin/Orders'
 
 import PagesNotFound from '@/pages/NotFound'
@@ -43,7 +44,7 @@ const App = (props) => {
               {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
 
               <Route exact path="/my/cart" component={MyCart} />
-              {/* <Route exact path="/my/orders" component={MyOrdersIndex} /> // MyOrdersIndex */}
+              <Route exact path="/my/orders" component={MyOrdersIndex} />
               {/* <Route exact path="/my/delivery" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
               {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
 

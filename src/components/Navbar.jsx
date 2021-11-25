@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { authSignup, authLogin, authLogout } from '@/actions/auth'
 import ModalsRegister from '@/modals/register'
 import ModalsLogin from '@/modals/login'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import logo from '@/assets/logo.png'
 
@@ -83,6 +84,7 @@ class LayoutsNavbar extends React.Component {
       )
     }
 
+    // TODO point balance
     // if a User (non-admin) is logged in
     if (currentUser) {
       return (
@@ -97,6 +99,8 @@ class LayoutsNavbar extends React.Component {
                 </>
               )}
             >
+              <Dropdown.ItemText>Point bal: 10,000</Dropdown.ItemText>
+              <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to="/my/profile">Edit My Profile</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/orders">My Order History</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/pointbalance">My Points balance</NavDropdown.Item>
