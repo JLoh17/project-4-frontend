@@ -60,7 +60,7 @@ const CarouselHome = () => {
   useState()
 
   return (
-    <>
+    <div id="carousel-home">
       <h3>Featured Products</h3>
       <Carousel cols={5} loop className="p-3">
         {cards.map((val) => (
@@ -75,7 +75,7 @@ const CarouselHome = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-    </>
+    </div>
   )
 }
 

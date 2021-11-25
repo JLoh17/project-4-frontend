@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 
-const MyCart = () => {
+const CartTable = () => {
   useState()
 
   const TestOrders = [
@@ -41,8 +41,7 @@ const MyCart = () => {
   ]
 
   return (
-    <div id="MyCart" className="my-3 container text-center">
-      <h1 className="my-3">My Cart</h1>
+    <div id="CartTable" className="my-3 container text-center">
       <Table class="table">
         <Thead>
           <Tr>
@@ -86,35 +85,9 @@ const MyCart = () => {
             }
         </Tbody>
       </Table>
-      <div className="d-flex justify-content-end my-3">
-        <h4>Subtotal:</h4>
-        <h4>$1,000</h4>
-      </div>
-      <div className="d-flex justify-content-end my-3">
-        <h6>Less points used: &nbsp;</h6>
-        <h6>
-          <input type="number" id="points-used" name="points" />
-        </h6>
-      </div>
-
-      <div className="d-flex justify-content-end my-3">
-        <h4>Total:</h4>
-        <h4>$900</h4>
-      </div>
-
-      <div className="d-flex justify-content-end mt-1">
-        <Link to="/my/orders/new">
-          <Button variant="success">Next Step</Button>
-        </Link>
-      </div>
-
-      <div className="d-flex justify-content-end">
-        <p>Complete order to earn XXXX points</p>
-      </div>
-
     </div>
 
   )
 }
 
-export default MyCart
+export default CartTable

@@ -9,6 +9,7 @@
 @import "./components/Searchbar.scss";
 @import "./components/Categorybar.scss";
 @import "./components/Footer.scss";
+@import "./components/CarouselHome.scss";
 
 @import "./components/Table.scss"; // CSS for all tables, should be in component?
 
@@ -16,9 +17,9 @@
 
 
 body {
-  background: whitesmoke;
+  background: #FAF9F6
 }
 
 .stickybar {
-  z-index: 1;
+  z-index: 100; // at index-1 the arrows in the carousel will go over the header icons, so set to 100.
 }
