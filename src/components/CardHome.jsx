@@ -41,16 +41,6 @@ const Card = [
     src: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg',
     title: 'Some Title',
     price: '$10'
-  }, {
-    id: '9',
-    src: 'https://www.fortress.com.hk/medias/PS5-Console-12520265.jpg?context=bWFzdGVyfGZyb250cHJkfDk3MjQ0fGltYWdlL2pwZWd8ZnJvbnRwcmQvaDI5L2hjZC85ODU4NDE0Mzc5MDM4LmpwZ3xjODQ1MjcxMDIxMDE0ZmNkMjE4ZDM1MmI1MDgzMGE4ZGUxYjcyOTQ1ZTQ0OWE1ZTJjZjQ2Y2U3ZjBjZWY1MDU0',
-    title: 'Some Title',
-    price: '$10'
-  }, {
-    id: '10',
-    src: 'https://www.fortress.com.hk/medias/FORERUNNER-55-Engli-12452629.jpg?context=bWFzdGVyfGZyb250cHJkfDkwNjQzfGltYWdlL2pwZWd8ZnJvbnRwcmQvaDg4L2gxOS85NzgxMzQ5NTgwODMwLmpwZ3xjMTdhNTk1Yzg2MWE0YjE1NDEzOTIyYzYwYWIxNDgyMDkzMWNiNzdiOTY1NGU5OTg2OGQ5MDIxYjk1ZmYzNGNj',
-    title: 'Some Title',
-    price: '$10'
   }
 ]
 
@@ -58,19 +48,19 @@ const CardHome = () => {
   useState()
 
   return (
-    <div id="CardHome" className="col-9 mx-auto p-3">
-      <div className="row mb-3">
-        <div className="card-deck">
-          {Card.map((order) => (
-            <div className="card col-6 col-md-3 p-0" key={order.id}>
+    <div id="CardHome" className="col-9 mx-auto">
+      <div className="row mb-3 align-center d-flex justify-content-between">
+        {Card.map((order) => (
+          <div className="card-deck col-6 col-md-3 p-1">
+            <div className="card" key={order.id}>
               <img src={order.src} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{order.title}</h5>
                 <p className="card-text">{order.price}</p>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   )
