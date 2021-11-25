@@ -99,8 +99,8 @@ class LayoutsNavbar extends React.Component {
             >
               <NavDropdown.Item as={NavLink} to="/my/profile">Edit My Profile</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/orders">My Order History</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/my/orders">My Points balance</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/my/orders">My Wishlist</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/my/pointbalance">My Points balance</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/my/wishlist">My Wishlist</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={this.handleLogoutClick} eventKey="4">Logout</NavDropdown.Item>
             </NavDropdown>

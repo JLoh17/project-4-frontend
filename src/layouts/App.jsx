@@ -12,6 +12,7 @@ import CompLoading from '@/components/Loading'
 
 import PagesHome from '@/pages/Home'
 import MyCart from '@/pages/my/Cart'
+import MyPointBalance from '@/pages/my/Pointbalance'
 import AdminOrders from '@/pages/admin/Orders'
 
 import PagesNotFound from '@/pages/NotFound'
@@ -47,7 +48,7 @@ const App = (props) => {
               {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
 
               {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
-              {/* <Route exact path="/my/pointbalance" component={MyPointBalance} /> // MyPointBalance */}
+              <Route exact path="/my/pointbalance" component={MyPointBalance} />
               {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
               <Route exact path="/admin/orders" component={AdminOrders} />
