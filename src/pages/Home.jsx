@@ -1,5 +1,6 @@
 import React from 'react'
 import CarouselHome from '@/components/CarouselHome'
+import CardHome from '@/components/CardHome'
 
 const PagesHome = () => (
   <div id="pages-home" className="container-fluid">
@@ -17,7 +18,7 @@ const PagesHome = () => (
     </div>
     <CarouselHome />
     <h3 className="my-3">New Products</h3>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat id rem cupiditate voluptates aperiam harum. Ab dolore expedita dicta minima, dolor quis quibusdam. Quasi accusantium, quidem quos quas voluptas minus.</p>
+    <CardHome />
   </div>
 )
 
