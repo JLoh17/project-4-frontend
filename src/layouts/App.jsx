@@ -11,7 +11,8 @@ import CompsFooter from '@/components/Footer'
 import CompLoading from '@/components/Loading'
 
 import PagesHome from '@/pages/Home'
-import AdminOrders from '@/pages/admin/orders'
+import MyCart from '@/pages/my/Cart'
+import AdminOrders from '@/pages/admin/Orders'
 
 import PagesNotFound from '@/pages/NotFound'
 
@@ -29,15 +30,17 @@ const App = (props) => {
         loaded ? (
           <>
             <LayoutsNavbar />
-            <Searchbar />
-            <CompsCategorybar />
+            <div className="sticky-top">
+              <Searchbar />
+              <CompsCategorybar />
+            </div>
             <Switch>
               <Route exact path="/" component={PagesHome} />
 
               {/* <Route exact path="/products" component={ProductIndex} /> // Product Index */}
               {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
 
-              {/* <Route exact path="/my/cart" component={MyCart} /> // MyCart */}
+              <Route exact path="/my/cart" component={MyCart} />
               {/* <Route exact path="/my/orders" component={MyOrdersIndex} /> // MyOrdersIndex */}
               {/* <Route exact path="/my/delivery" component={MyOrdersNew} /> // MyOrdersNew - Delivery details */}
               {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
