@@ -61,22 +61,26 @@ const ProductIndex = () => {
       </header>
 
       <div className="d-flex">
-        <div className="col-9">
+        <div className="col-12">
           <div className="row pb-3">
+            {
+              CardList.map((card) => (
+                <Card className="card-resize col-lg-3 mx-auto" key={card.id}>
+                  <Card.Img variant="top" src={card.src} />
+                  <Card.Body>
+                    <div className="d-flex justify-content-between">
+                      <Card.Title>{card.title}</Card.Title>
+                      {/* Should be card.Wishlists.length === 0  instead of fill */}
+                      <div className={fill ? 'far fa-heart' : 'fas fa-heart'} onClick={setToggle} />
 
-            <Card className="card-resize">
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <div className="d-flex justify-content-between">
-                  <Card.Title>Product Name</Card.Title>
+                    </div>
+                    <Card.Text>{card.price}</Card.Text>
+                    <Button variant="primary" className="btn-block">Add to Cart</Button>
+                  </Card.Body>
+                </Card>
 
-                  <div className={fill ? 'far fa-heart' : 'fas fa-heart'} onClick={setToggle} />
-
-                </div>
-                <Card.Text>$xxx</Card.Text>
-                <Button variant="primary" className="btn-block">Add to Cart</Button>
-              </Card.Body>
-            </Card>
+              ))
+            }
 
           </div>
         </div>
