@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import { propTypes } from 'react-grid-carousel'
 
+// TODO - shift this page to cart component
 const MyCart = () => {
   const [input, setInput] = useState('')
 
@@ -106,7 +107,7 @@ const MyCart = () => {
             id="points-used"
             name="points"
             step="5" // points go up in steps of 5
-            min="0"
+            min="0" // minimum input is 0 to prevent negative number
             onChange={onChange}
           />
         </div>
@@ -126,10 +127,12 @@ const MyCart = () => {
       </div>
 
       <div className="d-flex justify-content-end">
-        <h6>Complete order to earn (Subtotal/10) points</h6>
+        <h6>Complete order to earn XXXX points</h6>
       </div>
 
     </div>
+  // TODO - Total should be a formula of: subtotal - {value}
+  // TODO - "Complete order to earn XXXX points" must be linked to subtotal
 
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const SideSummary = () => {
+const SideOrderSummary = () => {
   useState()
 
   return (
@@ -33,4 +33,4 @@ const SideSummary = () => {
   )
 }
 
-export default SideSummary
+export default SideOrderSummary

@@ -6,16 +6,16 @@ const CompsCategorybar = () => (
   <div id="categorybar">
     <Nav className="container-fluid  flex-column flex-lg-row ">
       <Nav.Item>
-        <Nav.Link as={NavLink} to="/">Electronics</Nav.Link>
+        <Nav.Link as={NavLink} to="/products">Electronics</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={NavLink} to="/">Sports & Lifestyle</Nav.Link>
+        <Nav.Link as={NavLink} to="/products">Sports & Lifestyle</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={NavLink} to="/">Household</Nav.Link>
+        <Nav.Link as={NavLink} to="/products">Household</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={NavLink} to="/">Toys & Games</Nav.Link>
+        <Nav.Link as={NavLink} to="/products">Toys & Games</Nav.Link>
       </Nav.Item>
     </Nav>
   </div>

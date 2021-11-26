@@ -1,0 +1,19 @@
+#product-index {
+  min-height: calc(100vh - 267px);
+
+  .card-body {
+    padding: 1rem;
+    width: 15rem;
+  }
+
+  .fa-heart {
+    font-size: 1.2rem;
+    // vertical-align: baseline;
+  }
+
+  .fas.fa-heart {
+    font-size: 1.2rem;
+    // vertical-align: baseline;
+    color: red
+  }
+}

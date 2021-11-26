@@ -11,6 +11,7 @@ import CompsFooter from '@/components/Footer'
 import CompLoading from '@/components/Loading'
 
 import PagesHome from '@/pages/Home'
+import ProductIndex from '@/pages/ProductIndex'
 import MyCart from '@/pages/my/Cart'
 import MyOrdersNew from '@/pages/my/orders/New'
 import MyPointBalance from '@/pages/my/Pointbalance'
@@ -41,7 +42,7 @@ const App = (props) => {
             <Switch>
               <Route exact path="/" component={PagesHome} />
 
-              {/* <Route exact path="/products" component={ProductIndex} /> // Product Index */}
+              <Route exact path="/products" component={ProductIndex} />
               {/* <Route exact path="/products/:id" component={ProductShow} /> // Product Show */}
 
               <Route exact path="/my/cart" component={MyCart} />
