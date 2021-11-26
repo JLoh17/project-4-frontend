@@ -30,7 +30,7 @@ const MyOrdersIndex = () => {
 
   return (
 
-    <div className="orders-index container text-center my-3">
+    <div id="index-order" className="orders-index container text-center my-3">
       <h1 className="my-3">Your orders</h1>
 
       <Table class="table">

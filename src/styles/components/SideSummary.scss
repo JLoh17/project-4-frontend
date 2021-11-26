@@ -1,0 +1,15 @@
+#side-summary {
+  table>thead>tr>th {
+    border-top: none;
+  }
+
+  .points {
+    font-weight: bold;
+    color: blue;
+  }
+
+  .grand-total {
+    font-weight: bold;
+    // color: red;
+  }
+}

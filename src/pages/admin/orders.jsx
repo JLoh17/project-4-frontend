@@ -31,7 +31,7 @@ const AdminOrders = (props) => {
   const [status, setStatus] = useState('')
 
   return (
-    <div className="my-3 container text-center">
+    <div id="admin-orders" className="my-3 container text-center">
       <h1 className="my-3">My Admin Orders</h1>
       <Table class="table">
         <Thead>

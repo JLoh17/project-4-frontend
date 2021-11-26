@@ -103,7 +103,7 @@ const MyCart = () => {
       </div>
 
       <div className="d-flex justify-content-end mt-1">
-        <Link to="/my/orders/new">
+        <Link to="/my/delivery">
           <Button variant="success">Next Step</Button>
         </Link>
       </div>
