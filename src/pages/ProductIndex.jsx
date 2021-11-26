@@ -55,23 +55,23 @@ const ProductIndex = () => {
   ]
 
   return (
-    <div id="product-index" className="container-fluid">
+    <div id="product-index" className="container">
       <header className="text-center">
         <h1 className="py-3">Products</h1>
       </header>
 
       <div className="d-flex">
-        <div className="col-12">
-          <div className="row pb-3">
-            {
+        {/* <div className="col-12"> */}
+        <div className="row pb-3">
+          {
               CardList.map((card) => (
-                <Card className="card-resize col-lg-3 mx-auto" key={card.id}>
+                <Card className="col-sm-6 col-md-4 col-lg-3 mx-auto" key={card.id}>
                   <Card.Img variant="top" src={card.src} />
                   <Card.Body>
                     <div className="d-flex justify-content-between">
                       <Card.Title>{card.title}</Card.Title>
                       {/* Should be card.Wishlists.length === 0  instead of fill */}
-                      <div className={fill ? 'far fa-heart' : 'fas fa-heart'} onClick={setToggle} />
+                      <div className={fill ? 'far fa-heart' : 'fas fa-heart'} p-3 onClick={setToggle} />
 
                     </div>
                     <Card.Text>{card.price}</Card.Text>
@@ -82,8 +82,8 @@ const ProductIndex = () => {
               ))
             }
 
-          </div>
         </div>
+        {/* </div> */}
       </div>
 
     </div>
