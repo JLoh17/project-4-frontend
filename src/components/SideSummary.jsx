@@ -5,7 +5,7 @@ const SideSummary = () => {
 
   return (
     <div id="side-summary">
-      <table className="table">
+      <table className="table col-8">
         <thead>
           <tr>
             <th colSpan="2">Summary</th>
@@ -21,7 +21,7 @@ const SideSummary = () => {
               <div>Less points used:</div>
               <div className="points">5pp</div>
             </td>
-            <td>( $100)</td>
+            <td>$(100)</td>
           </tr>
           <tr className="grand-total">
             <td>Grand Total</td>

@@ -4,9 +4,16 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import { propTypes } from 'react-grid-carousel'
 
 const MyCart = () => {
-  useState()
+  const [input, setInput] = useState('')
+
+  // TODO - change 100 to point balance and console log to something else
+  const onChange = (e) => {
+    if (Number(e.target.value) > 100) { return console.log('more than 100') } // Limits the input to 100
+    setInput(e.target.value)
+  }
 
   const TestOrders = [
     {
@@ -56,7 +63,7 @@ const MyCart = () => {
         </Thead>
         <Tbody>
           {
-            // TODO
+            // TODO - map from actual data
             TestOrders.map((order) => (
               <Tr key={order.id}>
                 <Td><Image src={order.imageURL} className="pic-resize" />{order.src}</Td>
@@ -91,10 +98,20 @@ const MyCart = () => {
         <h4>$1,000</h4>
       </div>
       <div className="d-flex justify-content-end my-3">
-        <h6>Less points used: &nbsp;</h6>
-        <h6>
-          <input type="number" id="points-used" name="points" />
-        </h6>
+        <div>
+          <h6>Less points used: &nbsp;</h6>
+          <input
+            value={input}
+            type="number"
+            id="points-used"
+            name="points"
+            step="5" // points go up in steps of 5
+            min="0"
+            onChange={onChange}
+          />
+        </div>
+
+        <h6 className="align-middle">$({input / 5})</h6>
       </div>
 
       <div className="d-flex justify-content-end my-3">
@@ -104,12 +121,12 @@ const MyCart = () => {
 
       <div className="d-flex justify-content-end mt-1">
         <Link to="/my/delivery">
-          <Button variant="success">Next Step</Button>
+          <Button variant="success">Confirm order</Button>
         </Link>
       </div>
 
       <div className="d-flex justify-content-end">
-        <p>Complete order to earn XXXX points</p>
+        <h6>Complete order to earn (Subtotal/10) points</h6>
       </div>
 
     </div>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
+// TODO - form submits on input??
 const RenderForm = ({ errors, touched, isSubmitting }) => (
-
   <Form>
     <div className="form-group">
       <label htmlFor="firstName">First Name</label>
@@ -52,7 +52,8 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <ErrorMessage component="div" className="invalid-feedback" name="address" />
     </div>
 
-    <div className="custom-control custom-checkbox form-group">
+    {/* Unsure if need default address */}
+    {/* <div className="custom-control custom-checkbox form-group">
       <Field
         id="saveAsDefaultAddress"
         className="custom-control-input"
@@ -61,7 +62,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       />
       <label className="custom-control-label" htmlFor="saveAsDefaultAddress">Save as default address</label>
       <ErrorMessage component="div" className="invalid-feedback" name="saveAsDefaultAddress" />
-    </div>
+    </div> */}
 
     <div>
       <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Confirm Checkout</button>
@@ -69,6 +70,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
   </Form>
 
 )
+
 RenderForm.propTypes = {
   errors: PropTypes.shape().isRequired,
   touched: PropTypes.shape().isRequired,
@@ -89,7 +91,7 @@ const FormsDeliveryDetails = ({ initialValues, onSubmit }) => (
     validationSchema={deliveryDetailsSchema}
     onSubmit={onSubmit}
     component={RenderForm}
-    enableReinitialize
+    enableReinitialize // resets the form if initial value changes
   />
 )
 FormsDeliveryDetails.propTypes = {

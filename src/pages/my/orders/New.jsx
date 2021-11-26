@@ -6,7 +6,7 @@ const MyOrdersNew = () => (
   <div id="pages-orders-new" className="container my-3">
     <h1 className="text-center">Delivery details</h1>
     <div className="row mt-4">
-      <div className="col-12 col-lg-6 mb-4">
+      <div className="col-12 col-lg-6 mb-3">
         <SideSummary />
       </div>
       <div className="col-12 col-lg-6">
@@ -14,7 +14,6 @@ const MyOrdersNew = () => (
       </div>
     </div>
   </div>
-
 )
 
 export default MyOrdersNew
