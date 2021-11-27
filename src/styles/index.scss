@@ -2,7 +2,7 @@
 
 @import "./pages/PagesHome.scss";
 @import "./pages/ProductIndex.scss";
-// @import "./pages/ProductShow.scss";
+@import "./pages/ProductShow.scss";
 @import "./pages/MyCart.scss";
 @import "./pages/PagesNotFound.scss";
 
@@ -10,9 +10,11 @@
 @import "./components/Navbar.scss";
 @import "./components/Searchbar.scss";
 @import "./components/Categorybar.scss";
-@import "./components/Footer.scss";
 @import "./components/CarouselHome.scss";
+@import "./components/CarouselProduct.scss";
+@import "./components/ProductSelector.scss";
 @import "./components/SideSummary.scss";
+@import "./components/Footer.scss";
 
 @import "./components/Table.scss"; // CSS for all tables, should be in component?
 

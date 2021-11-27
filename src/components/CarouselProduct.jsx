@@ -1,66 +1,24 @@
 import React from 'react'
-import { Carousel } from 'react-carousel-minimal'
+// import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import { Carousel } from 'react-responsive-carousel'
 
-const CarouselProduct = () => {
-  const data = [
-    {
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1200px-GoldenGateBridge-001.jpg'
-
-    },
-    {
-      image: 'https://cdn.britannica.com/s:800x450,c:crop/35/204435-138-2F2B745A/Time-lapse-hyper-lapse-Isle-Skye-Scotland.jpg'
-    },
-    {
-      image: 'https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg'
-    }
-
-  ]
-
-  const captionStyle = {
-    fontSize: '2em',
-    fontWeight: 'bold'
-  }
-  const slideNumberStyle = {
-    fontSize: '20px',
-    fontWeight: 'bold'
-  }
-
-  return (
-    <div id="carousel-product">
-      <div style={{ textAlign: 'center' }}>
-        <div style={{
-          padding: '0 20px'
-        }}
-        >
-          <Carousel
-            data={data}
-            time={2000}
-            width="850px"
-            height="500px"
-            captionStyle={captionStyle}
-            radius="10px"
-            slideNumber
-            slideNumberStyle={slideNumberStyle}
-            captionPosition="bottom"
-            automatic
-            dots
-            pauseIconColor="white"
-            pauseIconSize="40px"
-            slideBackgroundColor="darkgrey"
-            slideImageFit="cover"
-            thumbnails
-            thumbnailWidth="100px"
-            style={{
-              textAlign: 'center',
-              maxWidth: '850px',
-              maxHeight: '500px',
-              margin: '40px auto'
-            }}
-          />
-        </div>
+const CarouselProduct = () => (
+  <div id="carousel-product">
+    <Carousel>
+      <div>
+        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_starlight.jpg" />
+        <p className="legend">Legend 1</p>
       </div>
-    </div>
-  )
-}
+      <div>
+        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg" />
+        <p className="legend">Legend 2</p>
+      </div>
+      <div>
+        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg" />
+        <p className="legend">Legend 3</p>
+      </div>
+    </Carousel>
+  </div>
+)
 
 export default CarouselProduct
