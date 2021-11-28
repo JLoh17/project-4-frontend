@@ -34,10 +34,25 @@ module.exports = {
           'postcss-loader',
           'sass-loader'
         ]
+      }, {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1000,
+              name: 'assets/img/[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_DOMAIN': JSON.stringify('http://localhost:3000')
+      // 'process.env.PUBLIC_URL': JSON.stringify('http://localhost:8080')
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/template.html'),

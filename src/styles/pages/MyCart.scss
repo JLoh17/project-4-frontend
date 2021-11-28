@@ -1,0 +1,14 @@
+#MyCart {
+  .pic-resize {
+    max-width: 15vw;
+    max-height: 15vh
+  }
+
+  div>h4:first-child {
+    margin-right: 1rem;
+  }
+
+  input[type='number'] {
+    width: 70px;
+  }
+}
