@@ -1,20 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { Carousel } from 'react-responsive-carousel'
 
-const CarouselProduct = () => (
+const CarouselProduct = ({ images }) => (
   <div id="carousel-product">
     <Carousel>
-      <div>
-        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_starlight.jpg" />
-      </div>
-      <div>
-        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg" />
-      </div>
-      <div>
-        <img src="https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg" />
-      </div>
+      {
+        images.map((image) => (
+          <div key={image.id}>
+            <img src={image.imageURL} />
+          </div>
+        ))
+      }
     </Carousel>
   </div>
 )
+
+CarouselProduct.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape()).isRequired
+}
 
 export default CarouselProduct

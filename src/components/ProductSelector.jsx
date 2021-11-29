@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+
 import { Button } from 'react-bootstrap'
 
-const ProductSelector = () => {
+const ProductSelector = ({ product }) => {
   const [input, setInput] = useState('')
 
   const onChange = (e) => {
@@ -10,9 +12,9 @@ const ProductSelector = () => {
 
   return (
     <div id="product-selector">
-      <h1 className="my-3">Price</h1>
-      <h5 className="my-5">Earn xxxx points on purchase</h5>
-      <h6 className="my-2">Description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed assumenda veritatis qui earum voluptas officiis molestiae blanditiis eligendi ex dolores, libero quidem totam ad aspernatur nemo, optio ipsam necessitatibus fugit! </h6>
+      <h1 className="my-3">{product.price}</h1>
+      <h5 className="my-5">Earn {product.price / 10} points on purchase</h5>
+      <h6 className="my-2">Description: {product.description} </h6>
       <div className="my-5 d-flex justify-content-start">
         <div className="mr-2">Quantity:</div>
         <input
@@ -37,6 +39,11 @@ const ProductSelector = () => {
   // TODO - fas fa-heart should be enabled for the button
 
   )
+}
+
+ProductSelector.propTypes = {
+  product: PropTypes.shape().isRequired
+
 }
 
 export default ProductSelector

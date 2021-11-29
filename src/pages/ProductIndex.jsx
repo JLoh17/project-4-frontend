@@ -9,7 +9,7 @@ import { getProductList } from '@/actions/product/index' // from Actions
 const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
     props.getProductList() // from Actions
-  })
+  }, [])
 
   const productShow = (productId) => {
     const { history: { push } } = props
@@ -19,6 +19,7 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
   // TODO - Add to Cart functionality
   // TODO - Wishlist functionality on the font awesome
   // TODO - to ask Denis (when less than 4 products the cards shrink in size from col
+
   return (
     <div id="product-index" className="container">
       <header className="text-center">
