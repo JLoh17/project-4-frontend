@@ -8,7 +8,7 @@ const ProductShow = () => {
   return (
     <div id="product-show" className="container">
 
-      <div className="my-5">
+      <div className="my-3">
         <div className="row">
           <div className="col-md">
             <h1 className="my-3">Product Name</h1>

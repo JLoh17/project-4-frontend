@@ -1,7 +1,18 @@
 #carousel-product {
 
-  img {
-    height: 20vh;
-    // width: 20vw;
+
+  .carousel .slide img {
+    height: 25rem;
+    object-fit: contain;
   }
+
+  // the wrapper at the bottom
+  .carousel {
+    text-align: center;
+  }
+
+  .carousel .thumb {
+    height: 50px;
+  }
+
 }

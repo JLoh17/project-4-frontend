@@ -10,7 +10,7 @@ const ProductSelector = () => {
 
   return (
     <div id="product-selector">
-      <h1 className="my-5">Price</h1>
+      <h1 className="my-3">Price</h1>
       <h5 className="my-5">Earn xxxx points on purchase</h5>
       <h6 className="my-2">Description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed assumenda veritatis qui earum voluptas officiis molestiae blanditiis eligendi ex dolores, libero quidem totam ad aspernatur nemo, optio ipsam necessitatibus fugit! </h6>
       <div className="my-5 d-flex justify-content-start">

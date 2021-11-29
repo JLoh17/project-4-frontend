@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { getProductList } from '@/actions/product/index' // from Actions
 
-const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from actions
+const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
     props.getProductList() // from Actions
   }, [])
