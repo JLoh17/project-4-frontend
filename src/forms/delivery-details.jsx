@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
@@ -64,9 +65,9 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <ErrorMessage component="div" className="invalid-feedback" name="saveAsDefaultAddress" />
     </div> */}
 
-    <div>
-      <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Confirm Checkout</button>
-    </div>
+    <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Proceed to payment
+      <Link to="/my/payment" />
+    </button>
   </Form>
 
 )

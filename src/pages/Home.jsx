@@ -4,7 +4,7 @@ import CardHome from '@/components/CardHome'
 
 const PagesHome = () => (
   <div id="pages-home" className="container-fluid">
-    <div className="container text-center p-3">
+    <div className="container align-center p-3">
       <div className="row my-3">
         <div className="col d-flex justify-content-center points">
           <div className="fab fa-pied-piper-pp mr-3" />

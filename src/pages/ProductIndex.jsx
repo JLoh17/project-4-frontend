@@ -9,8 +9,14 @@ import { getProductList } from '@/actions/product/index' // from Actions
 const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
     props.getProductList() // from Actions
-  }, [])
+  })
 
+  const productShow = (productId) => {
+    const { history: { push } } = props
+    push(`/products/${productId}`)
+  }
+
+  // TODO - Add to Cart functionality
   // TODO - Wishlist functionality on the font awesome
   // TODO - to ask Denis (when less than 4 products the cards shrink in size from col
   return (
@@ -19,16 +25,16 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
         <h1 className="py-3">Products</h1>
       </header>
 
-      <div className="d-flex">
+      <div className="d-flex align-center">
         {/* <div className="col-12"> */}
         <div className="row pb-3">
           {
               cardList.map((product) => (
-                <Card className="col-sm-6 col-md-4 col-lg-3" key={product.id}>
-                  <Card.Img variant="top" src={product.Images?.[0]?.imageURL} />
+                <Card className="col-sm-6 col-md-4 col-lg-3 p-0 mx-auto" key={product.id}>
+                  <Card.Img variant="top" src={product.Images?.[0]?.imageURL} onClick={() => productShow(product.id)} className="cursor-icon" />
                   <Card.Body>
                     <div className="d-flex justify-content-between">
-                      <Card.Title>{product.productName}</Card.Title>
+                      <Card.Title onClick={() => productShow(product.id)} className="cursor-icon">{product.productName}</Card.Title>
                       <div className="far fa-heart" />
                     </div>
                     <Card.Text>${(product.price.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</Card.Text>
@@ -49,7 +55,9 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
 
 ProductIndex.propTypes = {
   productState: PropTypes.shape().isRequired, // productState is connected to Root
-  getProductList: PropTypes.func.isRequired // connected to Actions
+  getProductList: PropTypes.func.isRequired, // connected to Actions
+  history: PropTypes.shape().isRequired
+
 }
 
 const mapStateToProps = (state) => ({
