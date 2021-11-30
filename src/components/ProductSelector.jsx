@@ -15,7 +15,7 @@ const ProductSelector = ({ product }) => {
       <h1 className="my-3">{product.price}</h1>
       <h5 className="my-5">Earn {product.price / 10} points on purchase</h5>
       <h6 className="my-2">Description: {product.description} </h6>
-      <div className="my-5 d-flex justify-content-start">
+      <div className="my-5 d-flex justify-content-start flex-grow-1">
         <div className="mr-2">Quantity:</div>
         <input
           value={input}
@@ -23,7 +23,7 @@ const ProductSelector = ({ product }) => {
           id="quantity-selected"
           name="quantity"
           step="1" // points go up in steps of 5
-          min="0" // minimum input is 0 to prevent negative number
+          min="1" // minimum input is 0 to prevent negative number
           max="99"
           onChange={onChange}
         />

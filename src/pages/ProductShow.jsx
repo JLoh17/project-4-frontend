@@ -4,12 +4,19 @@ import ProductSelector from '@/components/ProductSelector'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { useParams } from 'react-router-dom'
+
 import { getProductShow } from '@/actions/product/show' // from Actions
+import { ListGroupItem } from 'react-bootstrap'
 
 const ProductShow = ({ productShowState: { product }, ...props }) => {
+  const { id } = useParams() // useParams grabs the id from the address, the other way is to use match which can only be used if it is wrapped by a router
+
   useEffect(() => {
     props.getProductShow(id)
   }, [])
+
+  if (!product) return null // always need to do this regardless
 
   return (
     <div id="product-show" className="container">
@@ -18,7 +25,7 @@ const ProductShow = ({ productShowState: { product }, ...props }) => {
         <div className="row">
           <div className="col-md">
             <h1 className="my-3">{product.productName}</h1>
-            <CarouselProduct images={product.Image} />
+            <CarouselProduct images={product.Images} />
           </div>
           <div className="col-md">
             <ProductSelector product={product} />
