@@ -3,13 +3,20 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import qs from 'query-string'
 
 import { getProductList } from '@/actions/product/index' // from Actions
 
 const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
-    props.getProductList() // from Actions
+    const query = qs.parse(props.location.search)
+    props.getProductList(query) // from Actions
   }, [])
+
+  useEffect(() => {
+    const query = qs.parse(props.location.search)
+    props.getProductList(query) // from Actions
+  }, [props.location.search])
 
   const productShow = (productId) => {
     const { history: { push } } = props
@@ -49,7 +56,6 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
         </div>
         {/* </div> */}
       </div>
-
     </div>
   )
 }

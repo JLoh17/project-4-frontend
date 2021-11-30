@@ -1,12 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import qs from 'query-string'
 
-const CompsSearchbar = () => (
-  <div id="searchbar">
-    <div className="d-flex mx-auto p-3 col-md-9 ">
-      <input className="form-control" type="search" placeholder="Search entire store here..." aria-label="Search" />
-      <button className="btn btn-dark" type="submit">Search</button>
+import { getProductList } from '@/actions/product'
+
+const CompsSearchbar = (props) => {
+  const history = useHistory()
+  const [search, setSearch] = useState('')
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const params = qs.stringify({ q: search })
+    history.push({
+      pathname: '/products',
+      search: params.toString()
+    })
+  }
+
+  return (
+    <div id="searchbar">
+      <form action="/products" onSubmit={handleSubmit}>
+        <div className="d-flex mx-auto p-3 col-md-9 ">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Search entire store here..."
+            aria-label="Search"
+            name="search"
+            onChange={handleChange}
+            value={search}
+          />
+          <button
+            className="btn btn-dark"
+            type="submit"
+          >Search</button>
+        </div>
+      </form>
     </div>
-  </div>
-)
+  )
+}
 
 export default CompsSearchbar
