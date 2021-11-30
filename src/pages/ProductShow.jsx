@@ -3,11 +3,8 @@ import CarouselProduct from '@/components/CarouselProduct'
 import ProductSelector from '@/components/ProductSelector'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
 import { useParams } from 'react-router-dom'
-
 import { getProductShow } from '@/actions/product/show' // from Actions
-import { ListGroupItem } from 'react-bootstrap'
 
 const ProductShow = ({ productShowState: { product }, ...props }) => {
   const { id } = useParams() // useParams grabs the id from the address, the other way is to use match which can only be used if it is wrapped by a router

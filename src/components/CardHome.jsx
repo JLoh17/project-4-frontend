@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { getProductList } from '@/actions/product/index' // from Actions
 
-const CardHome = ({ productState: { newProduct }, ...props }) => { // this comes from the reducer
+const CardHome = ({ productState: { newProduct }, productShow, ...props }) => { // newProduct comes from the reducer
   useEffect(() => {
     props.getProductList({ isNew: true }) // from Actions
   }, [])
@@ -14,8 +14,14 @@ const CardHome = ({ productState: { newProduct }, ...props }) => { // this comes
       <div className="row mb-3 align-center d-flex ">
 
         {newProduct.map((product) => (
-          <div className="card-deck col-sm-6 col-md-4 col-lg-3 p-1">
-            <div className="card" key={product.id}>
+          <div
+            className="card-deck col-sm-6 col-md-4 col-lg-3 p-1"
+            key={product.id}
+          >
+            <div
+              className="card cursor-icon"
+              onClick={() => productShow(product.id)}
+            >
               <img src={product.Images?.[0]?.imageURL} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{product.productName}</h5>
@@ -31,7 +37,9 @@ const CardHome = ({ productState: { newProduct }, ...props }) => { // this comes
 
 CardHome.propTypes = {
   productState: PropTypes.shape().isRequired, // productState is connected to Root
-  getProductList: PropTypes.func.isRequired // connected to Actions
+  getProductList: PropTypes.func.isRequired, // connected to Actions
+  productShow: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = (state) => ({
