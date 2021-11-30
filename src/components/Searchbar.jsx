@@ -2,20 +2,18 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import qs from 'query-string'
 
-import { getProductList } from '@/actions/product'
-
-const CompsSearchbar = (props) => {
+const CompsSearchbar = () => {
   const history = useHistory()
   const [search, setSearch] = useState('')
 
   const handleChange = (e) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value) // grabs what was typed in the input
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault() // this needs to be done as removing the function of the submit button
 
-    const params = qs.stringify({ q: search })
+    const params = qs.stringify({ q: search }) // stringify the search params so it becomes an object
     history.push({
       pathname: '/products',
       search: params.toString()
@@ -24,7 +22,7 @@ const CompsSearchbar = (props) => {
 
   return (
     <div id="searchbar">
-      <form action="/products" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="d-flex mx-auto p-3 col-md-9 ">
           <input
             className="form-control"
@@ -32,7 +30,7 @@ const CompsSearchbar = (props) => {
             placeholder="Search entire store here..."
             aria-label="Search"
             name="search"
-            onChange={handleChange}
+            onChange={handleChange} // shows the value of the searched query
             value={search}
           />
           <button

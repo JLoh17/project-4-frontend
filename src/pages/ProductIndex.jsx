@@ -9,14 +9,14 @@ import { getProductList } from '@/actions/product/index' // from Actions
 
 const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
-    const query = qs.parse(props.location.search)
-    props.getProductList(query) // from Actions
+    const query = qs.parse(props.location.search) // the query path
+    props.getProductList(query) // from Actions - passing the query
   }, [])
 
   useEffect(() => {
     const query = qs.parse(props.location.search)
     props.getProductList(query) // from Actions
-  }, [props.location.search])
+  }, [props.location.search]) // on update
 
   const productShow = (productId) => {
     const { history: { push } } = props
@@ -63,7 +63,8 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
 ProductIndex.propTypes = {
   productState: PropTypes.shape().isRequired, // productState is connected to Root
   getProductList: PropTypes.func.isRequired, // connected to Actions
-  history: PropTypes.shape().isRequired
+  history: PropTypes.shape().isRequired,
+  location: PropTypes.shape().isRequired
 
 }
 
