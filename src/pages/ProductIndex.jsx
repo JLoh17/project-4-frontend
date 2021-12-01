@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import qs from 'query-string'
 import AddToCart from '@/components/AddtoCart'
+import Loading from '@/components/Loading'
 
 import { getProductList } from '@/actions/product/index' // from Actions
 
-const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList is from the reducer
+const ProductIndex = ({ productState: { cardList, isLoading }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
     const query = qs.parse(props.location.search) // the query path
     props.getProductList(query) // from Actions - passing the query
@@ -27,7 +28,16 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
   // TODO - Wishlist functionality on the font awesome
   // TODO - to ask Denis (when less than 4 products the cards shrink in size from col
 
+  if (isLoading) {
+    return (
+      <div className="container my-3">
+        <Loading />
+      </div>
+    )
+  }
+
   return (
+
     <div id="product-index" className="container">
       <header className="text-center">
         <h1 className="py-3">Products</h1>

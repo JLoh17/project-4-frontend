@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import CarouselHome from '@/components/CarouselHome'
 import CardHome from '@/components/CardHome'
-import PropTypes from 'prop-types'
 
-const PagesHome = (props) => {
+const PagesHome = (isLoading, props) => {
   const productShow = (productId) => {
     const { history: { push } } = props // cannot do history in the component as the router is tied to home page only, not the component <CarouselHome> and <CardHome>
     push(`/products/${productId}`)

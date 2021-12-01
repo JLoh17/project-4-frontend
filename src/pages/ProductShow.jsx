@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react'
-import CarouselProduct from '@/components/CarouselProduct'
-import ProductSelector from '@/components/ProductSelector'
+
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getProductShow } from '@/actions/product/show' // from Actions
 
-const ProductShow = ({ productShowState: { product }, ...props }) => {
+import CarouselProduct from '@/components/CarouselProduct'
+import ProductSelector from '@/components/ProductSelector'
+import Loading from '@/components/Loading'
+
+const ProductShow = ({ productShowState: { product, isLoading }, ...props }) => {
   const { id } = useParams() // useParams grabs the id from the address, the other way is to use match which can only be used if it is wrapped by a router
 
   useEffect(() => {
     props.getProductShow(id)
   }, [])
+
+  if (isLoading) {
+    return (
+      <div className="container my-3">
+        <Loading />
+      </div>
+    )
+  }
 
   if (!product) return null // always need to do this regardless
 
