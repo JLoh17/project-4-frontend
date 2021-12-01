@@ -24,7 +24,7 @@ const CarouselHome = ({ productState: { featured }, productShow, ...props }) => 
               <img src={product.Images?.[0]?.imageURL} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{product.productName}</h5>
-                <p className="card-text">{product.price}</p>
+                <p className="card-text">${(product.price.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</p>
               </div>
             </div>
           </Carousel.Item>
