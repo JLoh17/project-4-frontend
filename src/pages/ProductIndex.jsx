@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import qs from 'query-string'
+import AddToCart from '@/components/AddtoCart'
 
 import { getProductList } from '@/actions/product/index' // from Actions
 
@@ -38,7 +38,7 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
         <div className="row pb-3">
           {
               cardList.map((product) => (
-                <Card className="col-sm-6 col-md-4 col-lg-3 p-0 mx-auto" key={product.id}>
+                <Card className="col-sm-6 col-md-4 col-lg-3 mx-auto" key={product.id}>
                   <Card.Img variant="top" src={product.Images?.[0]?.imageURL} onClick={() => productShow(product.id)} className="cursor-icon" />
                   <Card.Body>
                     <div className="d-flex justify-content-between">
@@ -46,7 +46,7 @@ const ProductIndex = ({ productState: { cardList }, ...props }) => { // cardList
                       <div className="far fa-heart" />
                     </div>
                     <Card.Text>${(product.price.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</Card.Text>
-                    <Button variant="primary" className="btn-block">Add to Cart</Button>
+                    <AddToCart product={product} quantity={1} />
                   </Card.Body>
                 </Card>
 
