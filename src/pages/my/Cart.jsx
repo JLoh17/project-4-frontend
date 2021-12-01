@@ -1,140 +1,86 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import Form from 'react-bootstrap/Form'
-import Image from 'react-bootstrap/Image'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { propTypes } from 'react-grid-carousel'
+import CartTable from '@/components/CartTable'
 
-// TODO - shift this page to cart component
-const MyCart = () => {
-  const [input, setInput] = useState('')
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-  // TODO - change 100 to point balance and console log to something else
-  const onChange = (e) => {
-    if (Number(e.target.value) > 100) { return console.log('more than 100') } // Limits the input to 100
-    setInput(e.target.value)
+import { getCart } from '@/actions/my/cart/index'
+
+const MyCart = ({ myCartState: { cart }, ...props }) => {
+  useEffect(() => {
+    props.getCart()
+  }, [])
+
+  const [pointInput, setPointInput] = useState('')
+
+  // TODO - change 100 to point balance
+  const pointsOnChange = (e) => {
+    if (Number(e.target.value) > 100) return
+    setPointInput(e.target.value)
   }
 
-  const TestOrders = [
-    {
-      id: '1',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/16493/LOG_MXMASTER3_BLK_main_53009919_20201029171358_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '100' }
-    }, {
-      id: '2',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/12752/339481_main_74712191_20211005152223_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '200' }
-    }, {
-      id: '3',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '300' }
-    }, {
-      id: '4',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '400' }
-    }
-  ]
+  if (!cart) return null
 
   return (
     <div id="MyCart" className="my-3 container text-center">
       <h1 className="my-3">My Cart</h1>
-      <Table class="table">
-        <Thead>
-          <Tr>
-            <Th>Image</Th>
-            <Th>Product name</Th>
-            <Th>Price</Th>
-            <Th>Qty</Th>
-            <Th>Subtotal</Th>
-            <Th />
-          </Tr>
-        </Thead>
-        <Tbody>
-          {
-            // TODO - map from actual data
-            TestOrders.map((order) => (
-              <Tr key={order.id}>
-                <Td><Image src={order.imageURL} className="pic-resize" />{order.src}</Td>
-                <Td>{order.product.productName}</Td>
-                <Td>${order.product.price}</Td>
-                <Td>
-                  <Form.Control as="select" aria-label="status" name="status" onChange>
-                    <option
-                      defaultChecked
-                      value="1"
-                    >1</option>
-                    <option
-                      value="2"
-                    >2</option>
-                    <option
-                      value="3"
-                    >3</option>
-                  </Form.Control>
-                </Td>
-                <Td>${order.product.price * order.quantity}</Td>
-                <Td>
-                  <div className="fas fa-trash-alt trashBtn" onClick> Remove</div>
-                </Td>
+      <CartTable />
 
-              </Tr>
-            ))
-            }
-        </Tbody>
-      </Table>
       <div className="d-flex justify-content-end my-3">
         <h4>Subtotal:</h4>
-        <h4>$1,000</h4>
+        {/* Check whether the info provided back is an object or an array */}
+        <h4>${cart.reduce((prevSum, item) => (prevSum + (item.Product.price * item.quantity)), 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</h4>
       </div>
       <div className="d-flex justify-content-end my-3">
         <div>
           <h6>Less points used: &nbsp;</h6>
           <input
-            value={input}
+            value={pointInput}
             type="number"
             id="points-used"
             name="points"
             step="5" // points go up in steps of 5
             min="0" // minimum input is 0 to prevent negative number
-            onChange={onChange}
+            onChange={pointsOnChange}
           />
         </div>
 
-        <h6 className="align-middle">$({input / 5})</h6>
+        <h6 className="align-middle">$({pointInput / 5})</h6>
       </div>
 
       <div className="d-flex justify-content-end my-3">
         <h4>Total:</h4>
-        <h4>$900</h4>
+        <h4>${(('1000' - { pointsOnChange }).toLocaleString(undefined, { minimumFractionDigits: 2 }))}</h4>
       </div>
 
       <div className="d-flex justify-content-end mt-1">
-        <Link to="/my/delivery">
-          <Button variant="success">Confirm order</Button>
-        </Link>
+        <Button variant="success">Confirm order</Button>
       </div>
 
       <div className="d-flex justify-content-end">
-        <h6>Complete order to earn XXXX points</h6>
+        <h6>Complete order to earn {(100 / 10).toFixed(0)} points</h6>
       </div>
 
     </div>
   // TODO - Total should be a formula of: subtotal - {value}
   // TODO - "Complete order to earn XXXX points" must be linked to subtotal
-
   )
 }
 
-export default MyCart
+MyCart.propTypes = {
+  myCartState: PropTypes.shape().isRequired,
+  getCart: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  myCartState: state.myCartState
+})
+
+const mapDispatchToProps = {
+  getCart
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyCart)
+
+// export default MyCart

@@ -1,48 +1,29 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import Form from 'react-bootstrap/Form'
+import { getCart, updateCartQuantity, destroyCartItem } from '@/actions/my/cart/index'
+
 import Image from 'react-bootstrap/Image'
-import Button from 'react-bootstrap/Button'
 
-const CartTable = () => {
-  useState()
+// TODO - page shows a blank when selecting a new value
+const CartTable = ({ myCartState: { cart }, ...props }) => {
+  useEffect(() => {
+    props.getCart()
+  }, [])
 
-  const TestOrders = [
-    {
-      id: '1',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/16493/LOG_MXMASTER3_BLK_main_53009919_20201029171358_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '100' }
-    }, {
-      id: '2',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/12752/339481_main_74712191_20211005152223_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '200' }
-    }, {
-      id: '3',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '300' }
-    }, {
-      id: '4',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '400' }
-    }
-  ]
+  const quantityOnChange = (e, id) => {
+    props.updateCartQuantity({ quantity: e.target.value }, id) // id is required as need to find each specific item in the cart
+  }
+
+  const deleteOrderClick = (id) => {
+    props.destroyCartItem(id)
+  }
 
   return (
     <div id="CartTable" className="my-3 container text-center">
-      <Table class="table">
+      <Table className="table">
         <Thead>
           <Tr>
             <Th>Image</Th>
@@ -55,31 +36,27 @@ const CartTable = () => {
         </Thead>
         <Tbody>
           {
-            // TODO
-            TestOrders.map((order) => (
-              <Tr key={order.id}>
-                <Td><Image src={order.imageURL} className="pic-resize" />{order.src}</Td>
-                <Td>{order.product.productName}</Td>
-                <Td>${order.product.price}</Td>
+            cart.map((list) => (
+              <Tr key={list.id}>
+                <Td><Image src={list.Product.Images?.[0]?.imageURL} className="pic-resize" /></Td>
+                <Td>{list.Product.productName}</Td>
+                <Td>${list.Product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Td>
                 <Td>
-                  <Form.Control as="select" aria-label="status" name="status" onChange>
-                    <option
-                      defaultChecked
-                      value="1"
-                    >1</option>
-                    <option
-                      value="2"
-                    >2</option>
-                    <option
-                      value="3"
-                    >3</option>
-                  </Form.Control>
+                  <input
+                    value={list.quantity}
+                    type="number"
+                    id="quantity-selected"
+                    name="quantity"
+                    step="1" // points go up in steps of 5
+                    min="1" // minimum input is 1 to prevent negative number
+                    max="99"
+                    onChange={(e) => quantityOnChange(e, list.id)}
+                  />
                 </Td>
-                <Td>${order.product.price * order.quantity}</Td>
+                <Td>${(list.Product.price * list.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}</Td>
                 <Td>
-                  <div className="fas fa-trash-alt trashBtn" onClick> Remove</div>
+                  <div className="fas fa-trash-alt trashBtn" onClick={() => deleteOrderClick(list.id)}> Remove</div>
                 </Td>
-
               </Tr>
             ))
             }
@@ -90,4 +67,23 @@ const CartTable = () => {
   )
 }
 
-export default CartTable
+CartTable.propTypes = {
+  myCartState: PropTypes.shape().isRequired,
+  getCart: PropTypes.func.isRequired,
+  updateCartQuantity: PropTypes.func.isRequired,
+  destroyCartItem: PropTypes.func.isRequired
+
+}
+
+const mapStateToProps = (state) => ({
+  myCartState: state.myCartState
+})
+
+const mapDispatchToProps = {
+  getCart,
+  updateCartQuantity,
+  destroyCartItem
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartTable)

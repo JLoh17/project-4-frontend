@@ -53,7 +53,7 @@ const MyOrdersIndex = () => {
                 <Td>${order.price}</Td>
                 <Td>{order.status}</Td>
                 <Td>
-                  <div className="fas fa-trash-alt trashBtn" onClick> Remove</div>
+                  <div className="fas fa-trash-alt trashBtn"> Remove</div>
                 </Td>
 
               </Tr>

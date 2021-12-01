@@ -30,7 +30,7 @@ const ProductIndex = ({ productState: { cardList, isLoading }, ...props }) => { 
 
   if (isLoading) {
     return (
-      <div className="container my-3">
+      <div>
         <Loading />
       </div>
     )
