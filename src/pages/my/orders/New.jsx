@@ -10,7 +10,7 @@ const MyOrdersNew = () => (
         <SideOrderSummary />
       </div>
       <div className="col-12 col-lg-6">
-        <FormsDeliveryDetails />
+        <FormsDeliveryDetails onSubmit />
       </div>
     </div>
   </div>

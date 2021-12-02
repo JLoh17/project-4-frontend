@@ -11,7 +11,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="firstName">First Name</label>
       <Field
         id="firstName"
-        className={`form-control ${(errors.firstName && touched.firstName ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.firstName && touched.firstName ? 'is-invalid' : '')}`}
         name="firstName"
         type="text"
       />
@@ -22,7 +22,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="lastName">Last Name</label>
       <Field
         id="lastName"
-        className={`form-control ${(errors.lastName && touched.lastName ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.lastName && touched.lastName ? 'is-invalid' : '')}`}
         name="lastName"
         type="text"
       />
@@ -33,7 +33,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="telephone">Telephone</label>
       <Field
         id="telephone"
-        className={`form-control ${(errors.telephone && touched.telephone ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.telephone && touched.telephone ? 'is-invalid' : '')}`}
         name="telephone"
         type="text"
       />
@@ -44,7 +44,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="address">Address</label>
       <Field
         id="address"
-        className={`form-control ${(errors.address && touched.address ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.address && touched.address ? 'is-invalid' : '')}`}
         name="address"
         type="text"
         component="textarea"
