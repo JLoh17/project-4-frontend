@@ -6,6 +6,8 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import { authSignup, authLogin, authLogout } from '@/actions/auth'
+import { getCart } from '@/actions/my/cart/index'
+
 import ModalsRegister from '@/modals/register'
 import ModalsLogin from '@/modals/login'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -28,6 +30,10 @@ class LayoutsNavbar extends React.Component {
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleLogoutClick = this.handleLogoutClick.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getCart(this.state)
   }
 
   handleRegisterSubmit(values) {
@@ -67,6 +73,7 @@ class LayoutsNavbar extends React.Component {
 
   renderCollapse() {
     const { currentUserState: { currentUser } } = this.props
+    const { myCartState: { cart } } = this.props
 
     // if User is Admin and Logged in
     if (currentUser && currentUser.isAdmin) {
@@ -84,7 +91,6 @@ class LayoutsNavbar extends React.Component {
       )
     }
 
-    // TODO point balance
     // if a User (non-admin) is logged in
     if (currentUser) {
       return (
@@ -99,7 +105,7 @@ class LayoutsNavbar extends React.Component {
                 </>
               )}
             >
-              <Dropdown.ItemText>Point bal: 10,000</Dropdown.ItemText>
+              <Dropdown.ItemText>Point bal: {cart.map((item) => (item.User.pointsBalance))}</Dropdown.ItemText>
               <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to="/my/profile">Edit My Profile</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/orders">My Order History</NavDropdown.Item>
@@ -155,20 +161,26 @@ class LayoutsNavbar extends React.Component {
 
 LayoutsNavbar.propTypes = {
   history: PropTypes.shape().isRequired,
+  myCartState: PropTypes.shape().isRequired,
   currentUserState: PropTypes.shape().isRequired,
   authLogout: PropTypes.func.isRequired,
   authSignup: PropTypes.func.isRequired,
-  authLogin: PropTypes.func.isRequired
+  authLogin: PropTypes.func.isRequired,
+  getCart: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = (state) => ({
-  currentUserState: state.currentUser
+  currentUserState: state.currentUser,
+  myCartState: state.myCartState
+
 })
 
 const mapDispatchToProps = {
   authLogout,
   authSignup,
-  authLogin
+  authLogin,
+  getCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LayoutsNavbar))

@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
     case EDIT_CART_QUANTITY: {
       return produce(state, (draft) => {
         const index = draft.cart.findIndex((item) => item.id === action.payload.cart.id) // matches the item in the cart
-        if (index >= 0) draft.cart[index].quantity = action.payload.cart.quantity // bigger/less than 0 otherwise will return false
+        if (index >= 0) draft.cart[index] = action.payload.cart // bigger/less than 0 otherwise will return false
         // we want to use .quantity as we are only changing the quantity in this case, otherwise the response time of the API will become slower
         // golden standard for API response time is 100ms
       })

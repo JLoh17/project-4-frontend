@@ -53,18 +53,6 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <ErrorMessage component="div" className="invalid-feedback" name="address" />
     </div>
 
-    {/* Unsure if need default address */}
-    {/* <div className="custom-control custom-checkbox form-group">
-      <Field
-        id="saveAsDefaultAddress"
-        className="custom-control-input"
-        name="saveAsDefaultAddress"
-        type="checkbox"
-      />
-      <label className="custom-control-label" htmlFor="saveAsDefaultAddress">Save as default address</label>
-      <ErrorMessage component="div" className="invalid-feedback" name="saveAsDefaultAddress" />
-    </div> */}
-
     <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Proceed to payment
       <Link to="/my/payment" />
     </button>
@@ -82,8 +70,7 @@ const deliveryDetailsSchema = yup.object().shape({
   firstName: yup.string().required('Field is Required'),
   lastName: yup.string().required('Field is Required'),
   telephone: yup.string().required('Field is Required'),
-  address: yup.string().required('Field is Required'),
-  saveAsDefaultAddress: yup.boolean()
+  address: yup.string().required('Field is Required')
 })
 
 const FormsDeliveryDetails = ({ initialValues, onSubmit }) => (
