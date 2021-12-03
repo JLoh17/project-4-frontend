@@ -12,7 +12,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <Field
         id="firstName"
         className={`form-control ${(errors.firstName && touched.firstName ? 'is-invalid' : '')}`}
-        name="firstName"
+        name="firstName" // this links to the firstName from users if an initial value is found
         type="text"
       />
       <ErrorMessage component="div" className="invalid-feedback" name="firstName" />
@@ -75,7 +75,7 @@ const deliveryDetailsSchema = yup.object().shape({
 
 const FormsDeliveryDetails = ({ initialValues, onSubmit }) => (
   <Formik
-    initialValues={initialValues}
+    initialValues={initialValues} // the initial values in the form.
     validationSchema={deliveryDetailsSchema}
     onSubmit={onSubmit}
     component={RenderForm}

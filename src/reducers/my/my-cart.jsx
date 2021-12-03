@@ -1,6 +1,7 @@
 import produce from 'immer'
 
 import {
+  UNSET_MY_CART,
   SET_CART,
   GET_CART,
   EDIT_CART_QUANTITY,
@@ -40,6 +41,11 @@ export default (state = initialState, action) => {
     case GET_CART: {
       return produce(state, (draft) => {
         draft.isLoading = action.payload.loading
+      })
+    }
+    case UNSET_MY_CART: {
+      return produce(state, (draft) => {
+        draft.cart = []
       })
     }
 

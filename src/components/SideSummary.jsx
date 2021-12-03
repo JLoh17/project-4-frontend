@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-const SideOrderSummary = () => {
+const SideOrderSummary = ({ subTotal, points, grandTotal }) => {
   useState()
 
   return (
@@ -14,23 +15,29 @@ const SideOrderSummary = () => {
         <tbody>
           <tr>
             <td>Subtotal</td>
-            <td>$1,000</td>
+            <td>${subTotal}</td>
           </tr>
           <tr>
             <td>
               <div>Less points used:</div>
-              <div className="points">5pp</div>
+              <div className="points">{points}pp</div>
             </td>
-            <td>$(100)</td>
+            <td>${points / 5 }</td>
           </tr>
           <tr className="grand-total">
             <td>Grand Total</td>
-            <td>$900</td>
+            <td>${grandTotal}</td>
           </tr>
         </tbody>
       </table>
     </div>
   )
+}
+
+SideOrderSummary.propTypes = {
+  subTotal: PropTypes.number.isRequired,
+  points: PropTypes.number.isRequired,
+  grandTotal: PropTypes.number.isRequired
 }
 
 export default SideOrderSummary

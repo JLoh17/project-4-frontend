@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { getCart } from '@/actions/my/cart/index'
+import { createMyOrder } from '@/actions/my/order/new'
 import { ToastContainer, toast } from 'react-toastify'
 
 // import { createOrder } from '@/actions/my/orders/new'
@@ -28,12 +29,19 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
   const totalStr = total.toLocaleString(undefined, { minimumFractionDigits: 2 })
 
   // Toastify ID for unique toast
-  // in order to prevent toastify from showing multiple toasts onclick, set an ID to ensure it only happens once
+  // In order to prevent toastify from showing multiple toasts onclick, set an ID to ensure it only happens once
   const toastifyId = 'randomId'
   const toastifyId2 = 'randomId2'
 
   const orderCreateSubmit = () => {
-    props.createOrder({ points: (subTotal / 10) - pointInput, grandTotal: total })
+    const { history: { push } } = props
+    const values = {
+      points: ((subTotal / 10) - pointInput).toFixed(0),
+      grandTotal: total
+    }
+    props.createMyOrder(values).then((resp) => {
+      push(`/my/orders/${resp.data.myOrder.id}`)
+    })
   }
 
   const pointsOnChange = (e) => {
@@ -109,7 +117,7 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
             </div>
 
             <div className="d-flex justify-content-end mt-1">
-              <Button variant="success" onCreateClick={() => orderCreateSubmit()}>Confirm order</Button>
+              <Button variant="success" onClick={() => orderCreateSubmit()}>Confirm order</Button>
             </div>
 
             <div className="d-flex justify-content-end">
@@ -139,7 +147,10 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
 MyCart.propTypes = {
   currentUserState: PropTypes.shape().isRequired,
   myCartState: PropTypes.shape().isRequired,
-  getCart: PropTypes.func.isRequired
+  getCart: PropTypes.func.isRequired,
+  createMyOrder: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired
+
 }
 
 const mapStateToProps = (state) => ({
@@ -148,9 +159,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getCart
+  getCart,
+  createMyOrder
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyCart)
-
-// export default MyCart

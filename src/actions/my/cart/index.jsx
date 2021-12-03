@@ -2,6 +2,11 @@ import axios from 'axios'
 
 import { loading } from '@/actions/loading'
 
+// To unset the cart after order goes through
+export const UNSET_MY_CART = 'UNSET_MY_CART'
+export const unsetMyCart = () => ({ type: UNSET_MY_CART })
+
+// Creating a cart
 export const SET_CART = 'SET_CART'
 export const setCart = (payload) => ({ type: SET_CART, payload })
 
@@ -20,6 +25,7 @@ export const getCart = () => (dispatch) => {
   })
 }
 
+// Updating cart quantity
 export const EDIT_CART_QUANTITY = 'EDIT_CART_QUANTITY'
 export const editCartQuantity = (payload) => ({ type: EDIT_CART_QUANTITY, payload })
 
@@ -38,6 +44,7 @@ export const updateCartQuantity = (values, id) => (dispatch) => {
   })
 }
 
+// Deleting the cart item
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 export const removeCartItem = (payload) => ({ type: REMOVE_CART_ITEM, payload })
 export const DESTROY_CART_ITEM = 'DESTROY_CART_ITEM'
