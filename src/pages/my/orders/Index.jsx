@@ -1,33 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getOrdersIndex, destroyMyOrder } from '@/actions/my/order/index'
+
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 
-const MyOrdersIndex = () => {
-  useState()
+const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
+  useEffect(() => {
+    props.getOrdersIndex()
+  }, [])
 
-  const TestOrders = [
-    {
-      id: '1',
-      date: '2021/11/20',
-      price: '400',
-      status: 'Pending delivery'
-    }, {
-      id: '2',
-      date: '2021/11/20',
-      price: '400',
-      status: 'Pending delivery'
-    }, {
-      id: '3',
-      date: '2021/11/20',
-      price: '400',
-      status: 'Pending delivery'
-    }, {
-      id: '4',
-      date: '2021/11/20',
-      price: '400',
-      status: 'Pending delivery'
-    }
-  ]
+  const orderShow = (orderId) => {
+    const { history: { push } } = props
+    push(`/my/orders/${orderId}`)
+  }
 
+  const handleDeleteClick = (id) => {
+    props.destroyMyOrder(id)
+  }
+
+  // If the remove button shows a blank page and only shows on refresh, it's because there's something missing in the reducer
   return (
 
     <div id="index-order" className="orders-index container text-center my-3">
@@ -45,15 +37,22 @@ const MyOrdersIndex = () => {
         </Thead>
         <Tbody>
           {
-            // TODO
-            TestOrders.map((order) => (
-              <Tr key={order.id}>
-                <Td>{order.id}</Td>
-                <Td>{order.date}</Td>
-                <Td>${order.price}</Td>
-                <Td>{order.status}</Td>
+            listOrder.map((order) => (
+              <Tr key={order.id} className="cursor-icon order-index">
+                <Td onClick={() => orderShow(order.id)}>{order.id}</Td>
+                <Td onClick={() => orderShow(order.id)}>{order.createdAt.slice(0, 10)}</Td>
+                <Td onClick={() => orderShow(order.id)}>${(order.grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</Td>
+                <Td onClick={() => orderShow(order.id)}>{order.status}</Td>
                 <Td>
-                  <div className="fas fa-trash-alt trashBtn"> Remove</div>
+                  {
+                  order.status === 'Pending Payment' ? (
+                    <>
+                      <div onClick={() => handleDeleteClick(order.id)} className="fas fa-trash-alt trashBtn"> Remove</div>
+                    </>
+                  ) : (
+                    <span />
+                  )
+                }
                 </Td>
 
               </Tr>
@@ -65,4 +64,21 @@ const MyOrdersIndex = () => {
   )
 }
 
-export default MyOrdersIndex
+MyOrdersIndex.propTypes = {
+  getOrdersIndex: PropTypes.func.isRequired,
+  myOrdersIndexState: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
+  destroyMyOrder: PropTypes.func.isRequired
+
+}
+
+const mapStateToProps = (state) => ({
+  myOrdersIndexState: state.myOrdersIndexState // connected to Root
+})
+
+const mapDispatchToProps = {
+  getOrdersIndex, // connected to Actions
+  destroyMyOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrdersIndex)

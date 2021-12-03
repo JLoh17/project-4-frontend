@@ -7,7 +7,6 @@ import { getCart, updateCartQuantity, destroyCartItem } from '@/actions/my/cart/
 
 import Image from 'react-bootstrap/Image'
 
-// TODO - page shows a blank when selecting a new value
 const CartTable = ({ myCartState: { cart }, ...props }) => {
   useEffect(() => {
     props.getCart()

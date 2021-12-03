@@ -10,6 +10,11 @@
   cursor: pointer
 }
 
+.order-index:hover {
+  cursor: pointer;
+  background-color: rgba(248, 242, 242, 0.849);
+}
+
 .fa-trash-alt {
   color: red;
 }
