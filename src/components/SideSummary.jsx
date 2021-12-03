@@ -53,7 +53,7 @@ const SideOrderSummary = ({ subTotal, points, grandTotal }) => {
               <div>Less points used:</div>
               <div className="points">{points}pp</div>
             </td>
-            <td>-$({points / 5 })</td>
+            <td>-$({points / 5})</td>
           </tr>
           <tr className="grand-total">
             <td>Grand Total</td>
@@ -68,7 +68,8 @@ const SideOrderSummary = ({ subTotal, points, grandTotal }) => {
 SideOrderSummary.propTypes = {
   subTotal: PropTypes.number.isRequired,
   points: PropTypes.number.isRequired,
-  grandTotal: PropTypes.number.isRequired
+  grandTotal: PropTypes.number.isRequired,
+  pointsAsMoney: PropTypes.number.isRequired
 }
 
 export default SideOrderSummary

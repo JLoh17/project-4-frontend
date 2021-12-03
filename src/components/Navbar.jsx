@@ -11,6 +11,8 @@ import ModalsRegister from '@/modals/register'
 import ModalsLogin from '@/modals/login'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+import CompsBadge from '@/components/Badge'
+
 import logo from '@/assets/logo.png'
 
 class LayoutsNavbar extends React.Component {
@@ -111,7 +113,7 @@ class LayoutsNavbar extends React.Component {
 
             <Nav.Link as={NavLink} to="/my/cart" eventKey="3" className="my-auto">
               <span className="fas fa-shopping-cart" /> My Cart
-              {/* <CartBadge /> */}
+              <CompsBadge />
             </Nav.Link>
           </Nav>
         </>

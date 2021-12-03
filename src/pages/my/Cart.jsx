@@ -24,7 +24,7 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
   // Calc Sub and Total
   const subTotal = cart.reduce((prevSum, item) => (prevSum + (item.Product.price * item.quantity)), 0)
   const subTotalStr = subTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })
-  const pointsAsMoney = pointInput / 5
+  const pointsAsMoney = (pointInput / 5)
   const total = (subTotal - pointsAsMoney)
   const totalStr = total.toLocaleString(undefined, { minimumFractionDigits: 2 })
 
@@ -108,7 +108,7 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
                 />
               </div>
 
-              <h6 className="align-middle">${pointInput / 5}</h6>
+              <h6 className="align-middle">${pointsAsMoney}</h6>
             </div>
 
             <div className="d-flex justify-content-end my-3">
@@ -148,6 +148,7 @@ MyCart.propTypes = {
   currentUserState: PropTypes.shape().isRequired,
   myCartState: PropTypes.shape().isRequired,
   getCart: PropTypes.func.isRequired,
+
   createMyOrder: PropTypes.func.isRequired,
   history: PropTypes.shape().isRequired
 
