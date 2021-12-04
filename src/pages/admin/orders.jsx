@@ -1,39 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import Form from 'react-bootstrap/Form'
 
-const TestOrders = [
-  {
-    id: '1',
-    date: '2021-11-21',
-    grandTotal: '$100',
-    status: 'Pending payment'
-  }, {
-    id: '2',
-    date: '2021-11-22',
-    grandTotal: '$200',
-    status: 'Pending payment'
-  }, {
-    id: '3',
-    date: '2021-11-23',
-    grandTotal: '$300',
-    status: 'Pending payment'
-  }, {
-    id: '4',
-    date: '2021-11-24',
-    grandTotal: '$400',
-    status: 'Pending payment'
-  }
-]
+import { getAdminOrders, updateAdminOrderStatus } from '@/actions/admin/order'
 
-const AdminOrders = (props) => {
-  const [page, setPage] = useState(1)
-  const [status, setStatus] = useState('')
+const AdminOrders = ({ adminOrderState: { listAdminOrder }, ...props }) => {
+  useEffect(() => {
+    props.getAdminOrders()
+  }, [])
+
+  const handleChange = (e, OrderId) => {
+    props.updateAdminOrderStatus({ status: e.target.value }, OrderId)
+  }
 
   return (
     <div id="admin-orders" className="py-3 container text-center">
       <h1 className="py-3">My Admin Orders</h1>
-      <Table class="table">
+      <Table className="table">
         <Thead>
           <Tr>
             <Th>Date Ordered</Th>
@@ -45,30 +31,30 @@ const AdminOrders = (props) => {
         </Thead>
         <Tbody>
           {
-          // TODO
-          TestOrders.map((order) => (
-            <Tr>
-              <Td>{order.date}</Td>
+          listAdminOrder.map((order) => (
+            <Tr key={order.id}>
+              <Td>{order.createdAt.slice(0, 10)}</Td>
               <Td>{order.id}</Td>
-              <Td>{order.grandTotal}</Td>
+              <Td>${order.grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Td>
               <Td>{order.status}</Td>
               <Td>
-                <Form.Control as="select" aria-label="status" name="status" onChange>
+                <Form.Control as="select" aria-label="status" name="status" onChange={(e) => handleChange(e, order.id)}>
                   <option
                     defaultChecked
                     value="none"
-                  >-</option>
+                  >Status unchanged</option>
                   <option
-                    value="Pending-Payment"
+                    defaultChecked
+                    value="Pending Payment"
                   >Pending payment</option>
                   <option
-                    value="Pending-Delivery"
+                    value="Pending Delivery"
                   >Pending delivery</option>
                   <option
                     value="Delivered"
                   >Delivered</option>
                   <option
-                    value="Cancelled-Order"
+                    value="Cancelled"
                   >Order Cancelled</option>
                 </Form.Control>
               </Td>
@@ -81,4 +67,21 @@ const AdminOrders = (props) => {
   )
 }
 
-export default AdminOrders
+AdminOrders.propTypes = {
+  adminOrderState: PropTypes.shape().isRequired,
+  updateAdminOrderStatus: PropTypes.func.isRequired,
+  getAdminOrders: PropTypes.func.isRequired
+
+}
+
+const mapStateToProps = (state) => ({
+  adminOrderState: state.adminOrderState
+})
+
+const mapDispatchToProps = {
+  getAdminOrders,
+  updateAdminOrderStatus
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminOrders)

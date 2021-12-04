@@ -10,34 +10,6 @@ const MyPointBalance = ({ myPointBalanceState: { point }, currentUserState: { cu
     props.getPointsIndex()
   }, [])
 
-  // const TestPoints = [
-  //   {
-  //     id: '1',
-  //     points: '100',
-  //     order:
-  //       { id: '1',
-  //         createdAt: '2021/11/23' }
-  //   }, {
-  //     id: '2',
-  //     points: '-100',
-  //     order:
-  //       { id: '2',
-  //         createdAt: '2021/11/23' }
-  //   }, {
-  //     id: '3',
-  //     points: '2200',
-  //     order:
-  //       { id: '3',
-  //         createdAt: '2021/11/23' }
-  //   }, {
-  //     id: '4',
-  //     points: '-100',
-  //     order:
-  //       { id: '4',
-  //         createdAt: '2021/11/23' }
-  //   }
-  // ]
-
   const pointsBalance = (currentUser.pointsBalance).toLocaleString(undefined, { minimumFractionDigits: 0 })
 
   return (
@@ -57,7 +29,7 @@ const MyPointBalance = ({ myPointBalanceState: { point }, currentUserState: { cu
         point.map((balance) => (
           <Tr key={balance.id}>
             <Td>{balance.createdAt.slice(0, 10)}</Td>
-            <Td>{balance.id}</Td>
+            <Td>{balance.OrderId}</Td>
             <Td>{balance.points}</Td>
           </Tr>
         ))
