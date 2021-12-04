@@ -77,8 +77,8 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
   }
 
   return (
-    <div id="MyCart" className="my-3 container text-center">
-      <h1 className="my-3">My Cart</h1>
+    <div id="MyCart" className="py-3 container text-center">
+      <h1 className="py-3">My Cart</h1>
 
       {
         (cart.length === 0) ? (

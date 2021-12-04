@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getMyProfile } from '@/actions/my/profile'
+import { getMyProfile } from '@/actions/my/profile/profile'
 
 import LayoutsNavbar from '@/components/Navbar'
 import Searchbar from '@/components/Searchbar'
@@ -19,6 +19,7 @@ import MyOrdersShow from '@/pages/my/orders/Show'
 import MyPointBalance from '@/pages/my/Pointbalance'
 import MyOrdersIndex from '@/pages/my/orders/Index'
 import AdminOrders from '@/pages/admin/Orders'
+import AdminIndex from '@/pages/admin/Index'
 
 import PagesNotFound from '@/pages/NotFound'
 
@@ -57,7 +58,7 @@ const App = (props) => {
               {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
               <Route exact path="/admin/orders" component={AdminOrders} />
-              {/* <Route exact path="/admin" component={AdminIndex} /> // AdminIndex */}
+              <Route exact path="/admin" component={AdminIndex} />
 
               <Route component={PagesNotFound} />
             </Switch>

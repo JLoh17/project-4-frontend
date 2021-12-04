@@ -31,8 +31,8 @@ const AdminOrders = (props) => {
   const [status, setStatus] = useState('')
 
   return (
-    <div id="admin-orders" className="my-3 container text-center">
-      <h1 className="my-3">My Admin Orders</h1>
+    <div id="admin-orders" className="py-3 container text-center">
+      <h1 className="py-3">My Admin Orders</h1>
       <Table class="table">
         <Thead>
           <Tr>

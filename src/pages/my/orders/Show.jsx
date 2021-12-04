@@ -19,23 +19,18 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
 
   // Long way around
   // const quantity = order.OrderProducts.map((item) => (item.quantity * item.Product.price))
-
   // console.log('====>', quantity)
-
   // const subTotal1 = quantity.reduce((prevSum, item) => (prevSum + item), 0)
-
   // console.log(subTotal1)
 
   // Denis way
   const subTotal = (order.OrderProducts.reduce((prevSum, item) => (prevSum + (item.quantity * item.Product.price)), 0))
   const subTotalStr = subTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })
-
   const pointsUsed = ((subTotal / 10) - (order.points)).toFixed(0)
-
   const grandTotal = (order.grandTotal).toLocaleString(undefined, { minimumFractionDigits: 2 })
 
   return (
-    <div id="pages-orders-new" className="container my-3">
+    <div id="pages-orders-new" className="container p-3">
       <h1 className="text-center">Delivery details</h1>
       <div className="row mt-4">
         <div className="col-12 col-lg-6 mb-3">

@@ -78,7 +78,7 @@ class LayoutsNavbar extends React.Component {
           <Nav className="ml-auto">
             <NavDropdown alignRight title={<span><i className="fas fa-user-check mx-1" />My Admin Profile</span>}>
               <NavDropdown.Item as={NavLink} to="/admin/orders">Admin Orders</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/admin/index">Create/edit product</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/admin">Create/edit product</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={this.handleLogoutClick} eventKey="5">Logout</NavDropdown.Item>
             </NavDropdown>

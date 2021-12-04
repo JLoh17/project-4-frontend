@@ -3,7 +3,7 @@ import produce from 'immer'
 import {
   SET_CURRENT_USER,
   UNSET_CURRENT_USER
-} from '@/actions/my/profile'
+} from '@/actions/my/profile/profile'
 
 const initialState = {
   currentUser: null
