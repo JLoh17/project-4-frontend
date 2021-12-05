@@ -43,9 +43,9 @@ const ProductIndex = ({ productState: { cardList, isLoading }, ...props }) => { 
         <h1 className="py-3">Products</h1>
       </header>
 
-      <div className="d-flex align-center">
+      <div className="d-flex">
         {/* <div className="col-12"> */}
-        <div className="row pb-3">
+        <div className="row pb-3 my-auto">
           {
               cardList.map((product) => (
                 <Card className="col-sm-6 col-md-4 col-lg-3 mx-auto" key={product.id}>
