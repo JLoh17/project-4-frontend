@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import Form from 'react-bootstrap/Form'
+import Pagination from '@mui/material/Pagination'
 
 import { getAdminOrders, updateAdminOrderStatus } from '@/actions/admin/order'
 
-const AdminOrders = ({ adminOrderState: { listAdminOrder }, ...props }) => {
+const AdminOrders = ({ adminOrderState: { listAdminOrder, meta }, ...props }) => {
   useEffect(() => {
     props.getAdminOrders()
   }, [])
@@ -15,6 +16,15 @@ const AdminOrders = ({ adminOrderState: { listAdminOrder }, ...props }) => {
   const handleChange = (e, OrderId) => {
     props.updateAdminOrderStatus({ status: e.target.value }, OrderId)
   }
+
+  const getPage = (e, page) => {
+    props.getAdminOrders({ page })
+  }
+
+  if (listAdminOrder.length === 0) return null
+
+  const page = meta?.page
+  const totalPages = meta?.totalPages
 
   return (
     <div id="admin-orders" className="py-3 container text-center">
@@ -63,6 +73,16 @@ const AdminOrders = ({ adminOrderState: { listAdminOrder }, ...props }) => {
           }
         </Tbody>
       </Table>
+      <Pagination
+        className="d-flex justify-content-center"
+        variant="outlined"
+        color="primary"
+        count={totalPages}
+        page={page}
+        showFirstButton="1" // jumps to first page
+        showLastButton="1" // jumps to last page
+        onChange={getPage}
+      />
     </div>
   )
 }

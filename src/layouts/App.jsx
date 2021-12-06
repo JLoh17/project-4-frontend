@@ -19,7 +19,7 @@ import MyOrdersShow from '@/pages/my/orders/Show'
 import MyPointBalance from '@/pages/my/Pointbalance'
 import MyOrdersIndex from '@/pages/my/orders/Index'
 import AdminOrders from '@/pages/admin/Orders'
-import AdminIndex from '@/pages/admin/Index'
+import AdminProducts from '@/pages/admin/Product'
 
 import PagesNotFound from '@/pages/NotFound'
 
@@ -34,42 +34,42 @@ const App = (props) => {
   return (
     <Router>
       {
-        loaded ? (
-          <>
-            <LayoutsNavbar />
-            {/* temporary fix; to merge searchbar and categorybar together */}
-            <div className="sticky-top stickybar">
-              <Searchbar />
-              <CompsCategorybar />
+          loaded ? (
+            <>
+              <LayoutsNavbar />
+              {/* temporary fix; to merge searchbar and categorybar together */}
+              <div className="sticky-top stickybar">
+                <Searchbar />
+                <CompsCategorybar />
+              </div>
+              <Switch>
+                <Route exact path="/" component={PagesHome} />
+
+                <Route exact path="/products" component={ProductIndex} />
+                <Route exact path="/products/:id" component={ProductShow} />
+
+                <Route exact path="/my/cart" component={MyCart} />
+                <Route exact path="/my/orders" component={MyOrdersIndex} />
+                <Route exact path="/my/orders/:id" component={MyOrdersShow} />
+                {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
+
+                {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
+                <Route exact path="/my/pointbalance" component={MyPointBalance} />
+                {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
+
+                <Route exact path="/admin/orders" component={AdminOrders} />
+                <Route exact path="/admin" component={AdminProducts} />
+
+                <Route component={PagesNotFound} />
+              </Switch>
+              <CompsFooter />
+            </>
+          ) : (
+            <div className="container my-3">
+              <CompLoading />
             </div>
-            <Switch>
-              <Route exact path="/" component={PagesHome} />
-
-              <Route exact path="/products" component={ProductIndex} />
-              <Route exact path="/products/:id" component={ProductShow} />
-
-              <Route exact path="/my/cart" component={MyCart} />
-              <Route exact path="/my/orders" component={MyOrdersIndex} />
-              <Route exact path="/my/orders/:id" component={MyOrdersShow} />
-              {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
-
-              {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
-              <Route exact path="/my/pointbalance" component={MyPointBalance} />
-              {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
-
-              <Route exact path="/admin/orders" component={AdminOrders} />
-              <Route exact path="/admin" component={AdminIndex} />
-
-              <Route component={PagesNotFound} />
-            </Switch>
-            <CompsFooter />
-          </>
-        ) : (
-          <div className="container my-3">
-            <CompLoading />
-          </div>
-        )
-      }
+          )
+        }
     </Router>
   )
 }

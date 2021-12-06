@@ -25,12 +25,19 @@ const AdminIndex = ({ adminProductState: { adminProduct, isLoading }, ...props }
     props.deleteProduct(id)
   }
 
-  // TODO - how to refresh after creating product?
   const createProductSubmit = (values) => {
-    const { history: { push } } = props
-    props.createProduct(values).then(() => {
+    const newValues = { ...values }
+
+    if (values.imageURL) {
+      newValues.Images = [
+        {
+          imageURL: values.imageURL // need to do this section as formik assumes imageURL is in the same table as product, which it isn't
+        }
+      ]
+    }
+
+    props.createProduct(newValues).then(() => {
       closeCreateProductModal()
-      push('/admin')
     })
   }
 
@@ -40,7 +47,7 @@ const AdminIndex = ({ adminProductState: { adminProduct, isLoading }, ...props }
       <button type="button" className="btn btn-primary mb-3" onClick={openCreateProductModal}>Create new product</button>
       {
           adminProduct.map((product) => (
-            <div className="d-flex justify-content-center text-format" key={product.id} align-center>
+            <div className="d-flex justify-content-center text-format" key={product.id}>
               <p className="mr-3 my-1">ProductID: {product.id}</p>
               <p className="mr-3 my-1">Name: {product.productName}</p>
               <p className="mr-3 my-1">Price: ${product.price}</p>

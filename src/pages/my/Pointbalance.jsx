@@ -10,12 +10,17 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
     props.getPointsIndex()
   }, [])
 
+  const getPage = (e, page) => {
+    props.getPointsIndex({ page })
+  }
+
+  if (point.length === 0) return null
+
   const pointsBalance = (currentUser.pointsBalance).toLocaleString(undefined, { minimumFractionDigits: 0 })
 
-  const page = meta?.page
-  const totalPages = meta?.totalPages
+  const { page } = meta
+  const { totalPages } = meta
 
-  // TODO - how to change the meta for pagination?
   return (
     <div id="point-balance" className="container p-3">
       <h1 className="my-3">Your point balance is: {pointsBalance} </h1>
@@ -46,8 +51,9 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
         color="primary"
         count={totalPages}
         page={page}
-        showFirstButton="1"
-        showLastButton="1"
+        showFirstButton="1" // jumps to first page
+        showLastButton="1" // jumps to last page
+        onChange={getPage} // based on MUI, the changing page is this
       />
     </div>
   )

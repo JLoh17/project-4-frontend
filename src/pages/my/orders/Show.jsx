@@ -29,6 +29,14 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
   const pointsUsed = ((subTotal / 10) - (order.points)).toFixed(0)
   const grandTotal = (order.grandTotal).toLocaleString(undefined, { minimumFractionDigits: 2 })
 
+  // TODO - pending submission of delivery address
+  // const submitDeliveryDetails = (values) => {
+  //   const { history: { push } } = props
+  //   props.submitDeliveryDetails(values).then(() => {
+  //     push()
+  //   })
+  // }
+
   return (
     <div id="pages-orders-new" className="container p-3">
       <h1 className="text-center">Delivery details</h1>
@@ -41,12 +49,14 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
           />
         </div>
         <div className="col-12 col-lg-6">
-          <FormsDeliveryDetails initialValues={{
-            firstName: currentUser.firstName || '',
-            lastName: currentUser.lastName || '',
-            address: currentUser.address || '',
-            telephone: currentUser.telephone || ''
-          }}
+          <FormsDeliveryDetails
+            initialValues={{
+              firstName: currentUser.firstName || '',
+              lastName: currentUser.lastName || '',
+              address: currentUser.address || '',
+              telephone: currentUser.telephone || ''
+            }}
+            // onSubmit={() => submitDeliveryDetails(currentUser.id)}
           // passing in props from User. If field is empty, then shows an empty string
           />
         </div>

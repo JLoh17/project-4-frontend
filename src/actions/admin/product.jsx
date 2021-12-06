@@ -20,6 +20,8 @@ export const getAdminProductList = (filter = {}) => (dispatch) => {
   })
 }
 
+export const ADD_PRODUCT_TO_ADMININDEX = 'ADD_PRODUCT_TO_ADMININDEX'
+export const addProductToAdminIndex = (payload) => ({ type: ADD_PRODUCT_TO_ADMININDEX, payload })
 export const CREATE_ADMIN_PRODUCT = 'CREATE_ADMIN_PRODUCT'
 export const createProduct = (values) => (dispatch) => new Promise((resolve, reject) => {
   dispatch(loading(CREATE_ADMIN_PRODUCT, { loading: true }))
@@ -30,6 +32,7 @@ export const createProduct = (values) => (dispatch) => new Promise((resolve, rej
     withCredentials: true
   }).then((resp) => {
     resolve(resp)
+    dispatch(addProductToAdminIndex(resp.data))
   }).catch((err) => {
     reject(err)
   }).finally(() => {

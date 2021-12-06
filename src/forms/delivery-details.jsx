@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as yup from 'yup'
+
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import axios from 'axios'
 
 // TODO - form submits on input??
 const RenderForm = ({ errors, touched, isSubmitting }) => (
@@ -53,11 +56,15 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <ErrorMessage component="div" className="invalid-feedback" name="address" />
     </div>
 
+    <label htmlFor="CCdetails">Credit card</label>
+    <div className="form-group card-info">
+      <CardElement />
+    </div>
+
     <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Proceed to payment
       <Link to="/my/payment" />
     </button>
   </Form>
-
 )
 
 RenderForm.propTypes = {
