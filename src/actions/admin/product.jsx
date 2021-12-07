@@ -32,7 +32,7 @@ export const createProduct = (values) => (dispatch) => new Promise((resolve, rej
     withCredentials: true
   }).then((resp) => {
     resolve(resp)
-    dispatch(addProductToAdminIndex(resp.data))
+    dispatch(addProductToAdminIndex(resp.data.product)) // resp.data.product refer to the product in the backend (line 65: order create)
   }).catch((err) => {
     reject(err)
   }).finally(() => {

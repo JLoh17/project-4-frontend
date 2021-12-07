@@ -66,10 +66,9 @@ const SideOrderSummary = ({ subTotal, points, grandTotal }) => {
 }
 
 SideOrderSummary.propTypes = {
-  subTotal: PropTypes.number.isRequired,
+  subTotal: PropTypes.string.isRequired,
   points: PropTypes.number.isRequired,
-  grandTotal: PropTypes.number.isRequired,
-  pointsAsMoney: PropTypes.number.isRequired
+  grandTotal: PropTypes.number.isRequired
 }
 
 export default SideOrderSummary

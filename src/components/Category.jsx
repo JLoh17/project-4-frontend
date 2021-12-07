@@ -24,16 +24,16 @@ const CompsCategorybar = () => {
           <Nav.Link as={NavLink} to="/products">All Categories</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={handleClick}>Electronics</Nav.Link>
+          <Nav.Link onClick>Electronics</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={handleClick}>Sports & Lifestyle</Nav.Link>
+          <Nav.Link onClick>Sports & Lifestyle</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={handleClick}>Household</Nav.Link>
+          <Nav.Link onClick>Household</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={handleClick}>Toys & Games</Nav.Link>
+          <Nav.Link onClick>Toys & Games</Nav.Link>
         </Nav.Item>
       </Nav>
     </div>

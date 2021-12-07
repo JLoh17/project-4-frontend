@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART: {
       return produce(state, (draft) => {
-        draft.cart = action.payload.cart
+        draft.cart.push(action.payload.newCartItem)
       })
     }
     case CREATE_CART_ITEM: {

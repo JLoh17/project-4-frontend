@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import axios from 'axios'
-
-// TODO - form submits on input??
 const RenderForm = ({ errors, touched, isSubmitting }) => (
   <Form>
     <div className="form-group">
@@ -44,21 +40,16 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
     </div>
 
     <div className="form-group">
-      <label htmlFor="address">Address</label>
+      <label htmlFor="deliveryAddress">Address</label>
       <Field
-        id="address"
-        className={`form-control ${(errors.address && touched.address ? 'is-invalid' : '')}`}
-        name="address"
+        id="deliveryAddress"
+        className={`form-control ${(errors.deliveryAddress && touched.deliveryAddress ? 'is-invalid' : '')}`}
+        name="deliveryAddress"
         type="text"
         component="textarea"
         rows="3"
       />
-      <ErrorMessage component="div" className="invalid-feedback" name="address" />
-    </div>
-
-    <label htmlFor="CCdetails">Credit card</label>
-    <div className="form-group card-info">
-      <CardElement />
+      <ErrorMessage component="div" className="invalid-feedback" name="deliveryAddress" />
     </div>
 
     <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Proceed to payment
@@ -76,8 +67,8 @@ RenderForm.propTypes = {
 const deliveryDetailsSchema = yup.object().shape({
   firstName: yup.string().required('Field is Required'),
   lastName: yup.string().required('Field is Required'),
-  telephone: yup.string().required('Field is Required'),
-  address: yup.string().required('Field is Required')
+  telephone: yup.number().required('Field is Required'),
+  deliveryAddress: yup.string().required('Field is Required')
 })
 
 const FormsDeliveryDetails = ({ initialValues, onSubmit }) => (

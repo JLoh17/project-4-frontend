@@ -21,6 +21,9 @@ import MyOrdersIndex from '@/pages/my/orders/Index'
 import AdminOrders from '@/pages/admin/Orders'
 import AdminProducts from '@/pages/admin/Product'
 
+import PaymentSuccess from '@/pages/stripe/Success'
+import PaymentCancelled from '@/pages/stripe/Cancel'
+
 import PagesNotFound from '@/pages/NotFound'
 
 const App = (props) => {
@@ -52,6 +55,9 @@ const App = (props) => {
                 <Route exact path="/my/orders" component={MyOrdersIndex} />
                 <Route exact path="/my/orders/:id" component={MyOrdersShow} />
                 {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
+
+                <Route exact path="/payment-success" component={PaymentSuccess} />
+                <Route exact path="/payment-cancelled" component={PaymentCancelled} />
 
                 {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
                 <Route exact path="/my/pointbalance" component={MyPointBalance} />

@@ -68,6 +68,26 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <ErrorMessage component="div" className="invalid-feedback" name="imageURL" />
     </div>
 
+    <div className="form-group">
+      <label htmlFor="imageURL2">Image URL 2 (optional)</label>
+      <Field
+        id="imageURL2"
+        className={`form-control ${(errors.imageURL && touched.imageURL ? 'is-invalid' : '')}`}
+        name="imageURL2"
+        type="text"
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="imageURL3">Image URL 3 (optional)</label>
+      <Field
+        id="imageURL3"
+        className={`form-control ${(errors.imageURL && touched.imageURL ? 'is-invalid' : '')}`}
+        name="imageURL3"
+        type="text"
+      />
+    </div>
+
     <div className="custom-control custom-checkbox form-group">
       <Field
         id="isNew"
@@ -119,6 +139,8 @@ const createProductSchema = yup.object().shape({
   price: yup.number().required('Field is Required'),
   description: yup.string().required('Field is Required'),
   imageURL: yup.string().required('Field is Required'),
+  imageURL2: yup.string().notRequired(''),
+  imageURL3: yup.string().notRequired(''),
   isNew: yup.boolean(),
   isFeatured: yup.boolean(),
   isDisabled: yup.boolean()
@@ -131,7 +153,9 @@ const FormsCreateProduct = ({ onSubmit }) => (
       CategoryId: '',
       price: '',
       description: '',
-      imageURL: ''
+      imageURL: '',
+      imageURL2: '',
+      imageURL3: ''
     }} // if not initial values, set to empty string
     validationSchema={createProductSchema}
     onSubmit={onSubmit}

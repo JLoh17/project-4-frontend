@@ -11,11 +11,11 @@ const CardHome = ({ productState: { newProduct }, productShow, ...props }) => { 
 
   return (
     <div id="CardHome" className="col-9 mx-auto">
-      <div className="row mb-3 align-center d-flex ">
+      <div className="row mb-3 align-center ">
 
         {newProduct.map((product) => (
           <div
-            className="card-deck col-sm-6 col-md-4 col-lg-3 p-1"
+            className="card-deck col-6 col-md-4 col-lg-3 p-1"
             key={product.id}
           >
             <div

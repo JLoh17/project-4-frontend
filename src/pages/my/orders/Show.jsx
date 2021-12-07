@@ -4,13 +4,16 @@ import SideOrderSummary from '@/components/SideSummary'
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 import { getMyOrder } from '@/actions/my/order/show'
+import { updateOrderDetails } from '@/actions/my/order/new'
 
-const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { currentUser }, ...props }) => {
-  const { id } = useParams()
-
+const MyOrdersShow = ({
+  myOrderShowState: { order },
+  currentUserState: { currentUser },
+  match: { params: { id } },
+  ...props
+}) => {
   useEffect(() => {
     props.getMyOrder(id)
   }, [])
@@ -29,13 +32,11 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
   const pointsUsed = ((subTotal / 10) - (order.points)).toFixed(0)
   const grandTotal = (order.grandTotal).toLocaleString(undefined, { minimumFractionDigits: 2 })
 
-  // TODO - pending submission of delivery address
-  // const submitDeliveryDetails = (values) => {
-  //   const { history: { push } } = props
-  //   props.submitDeliveryDetails(values).then(() => {
-  //     push()
-  //   })
-  // }
+  const submitDeliveryDetails = (values) => {
+    props.updateOrderDetails({ ...values, pointsUsed }, id).then((data) => {
+      window.location.href = data.url
+    })
+  }
 
   return (
     <div id="pages-orders-new" className="container p-3">
@@ -53,11 +54,10 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
             initialValues={{
               firstName: currentUser.firstName || '',
               lastName: currentUser.lastName || '',
-              address: currentUser.address || '',
+              deliveryAddress: currentUser.address || '',
               telephone: currentUser.telephone || ''
             }}
-            // onSubmit={() => submitDeliveryDetails(currentUser.id)}
-          // passing in props from User. If field is empty, then shows an empty string
+            onSubmit={submitDeliveryDetails}
           />
         </div>
       </div>
@@ -67,10 +67,10 @@ const MyOrdersShow = ({ myOrderShowState: { order }, currentUserState: { current
 
 MyOrdersShow.propTypes = {
   myOrderShowState: PropTypes.shape().isRequired,
-  createMyOrder: PropTypes.func.isRequired,
+  updateOrderDetails: PropTypes.func.isRequired,
   getMyOrder: PropTypes.func.isRequired,
-  currentUserState: PropTypes.shape().isRequired
-
+  currentUserState: PropTypes.shape().isRequired,
+  match: PropTypes.shape().isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -80,7 +80,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getMyOrder
+  getMyOrder,
+  updateOrderDetails
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyOrdersShow)

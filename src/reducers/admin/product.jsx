@@ -3,9 +3,8 @@ import produce from 'immer'
 import {
   SET_ADMINPRODUCTLIST,
   GET_ADMINPRODUCTLIST,
-  // EDIT_ADMIN_ORDERSTATUS,
-  // UPDATE_ADMIN_ORDERSTATUS,
   CREATE_ADMIN_PRODUCT,
+  ADD_PRODUCT_TO_ADMININDEX,
   REMOVE_PRODUCT,
   DESTROY_PRODUCT
 } from '@/actions/admin/product'
@@ -13,9 +12,10 @@ import {
 const initialState = {
   meta: null,
   adminProduct: [],
-  product: [],
-  isLoading: false,
-  isCreateAdminProductLoading: false
+  addProduct: null,
+  isCreateAdminProductLoading: false,
+  isDestroyProductLoading: true,
+  isLoading: false
 }
 
 export default (state = initialState, action) => {
@@ -47,15 +47,20 @@ export default (state = initialState, action) => {
         draft.isCreateAdminProductLoading = action.payload.loading
       })
     }
+    case ADD_PRODUCT_TO_ADMININDEX: {
+      return produce(state, (draft) => {
+        draft.adminProduct.push(action.payload)
+      })
+    }
     case REMOVE_PRODUCT: {
       return produce(state, (draft) => {
-        const index = draft.product.findIndex((product) => product.id === action.payload)
-        if (index !== -1) draft.product.splice(index, 1)
+        const index = draft.adminProduct.findIndex((product) => product.id === action.payload) // no need to find the id as deleting the whole thing
+        if (index !== -1) draft.adminProduct.splice(index, 1)
       })
     }
     case DESTROY_PRODUCT: {
       return produce(state, (draft) => {
-        draft.isLoading = action.payload.loading
+        draft.isDestroyProductLoading = action.payload.loading
       })
     }
     default: {
