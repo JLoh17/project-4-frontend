@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import FormsDeliveryDetails from '@/forms/delivery-details'
+import FormsDeliveryShow from '@/forms/delivery-show'
 import SideOrderSummary from '@/components/SideSummary'
 
 import PropTypes from 'prop-types'
@@ -38,30 +39,59 @@ const MyOrdersShow = ({
     })
   }
 
-  return (
-    <div id="pages-orders-new" className="container p-3">
-      <h1 className="text-center">Delivery details</h1>
-      <div className="row mt-4">
-        <div className="col-12 col-lg-6 mb-3">
-          <SideOrderSummary
-            subTotal={subTotalStr}
-            points={pointsUsed}
-            grandTotal={grandTotal}
-          />
-        </div>
-        <div className="col-12 col-lg-6">
-          <FormsDeliveryDetails
-            initialValues={{
-              firstName: currentUser.firstName || '',
-              lastName: currentUser.lastName || '',
-              deliveryAddress: currentUser.address || '',
-              telephone: currentUser.telephone || ''
-            }}
-            onSubmit={submitDeliveryDetails}
-          />
+  if (order.status === 'Pending Delivery' || order.status === 'Delivered' || order.status === 'Cancelled') {
+    return (
+      <div id="pages-orders-new" className="container p-3">
+        <h1 className="text-center">Order ID: {order.id}</h1>
+        <div className="row mt-4">
+          <div className="col-12 col-lg-6 mb-3">
+            <SideOrderSummary />
+          </div>
+          <div className="col-12 col-lg-6">
+            <FormsDeliveryShow
+              initialValues={{
+                firstName: order.firstName || '',
+                lastName: order.lastName || '',
+                deliveryAddress: order.deliveryAddress || '',
+                telephone: order.telephone || ''
+              }}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    )
+  }
+
+  if (order.status === 'Pending Payment') {
+    return (
+      <div id="pages-orders-new" className="container p-3">
+        <h1 className="text-center">Delivery details | Order ID: {order.id}</h1>
+        <div className="row mt-4">
+          <div className="col-12 col-lg-6 mb-3">
+            <SideOrderSummary
+              subTotal={subTotalStr}
+              points={pointsUsed}
+              grandTotal={grandTotal}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <FormsDeliveryDetails
+              initialValues={{
+                firstName: currentUser.firstName || '',
+                lastName: currentUser.lastName || '',
+                deliveryAddress: currentUser.address || '',
+                telephone: currentUser.telephone || ''
+              }}
+              onSubmit={submitDeliveryDetails}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div id="pages-orders-new" className="container my-3">should never see this section</div>
   )
 }
 

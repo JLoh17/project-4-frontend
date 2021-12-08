@@ -25,7 +25,7 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
     <div id="index-order" className="orders-index container text-center my-3">
       <h1 className="my-3">Your orders</h1>
 
-      <Table class="table">
+      <Table className="table">
         <Thead>
           <Tr>
             <Th>Order #</Th>
@@ -47,7 +47,7 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
                   {
                   order.status === 'Pending Payment' ? (
                     <>
-                      <div onClick={() => handleDeleteClick(order.id)} className="fas fa-trash-alt trashBtn"> Remove</div>
+                      <div onClick={() => handleDeleteClick(order.id)} className="fas fa-trash-alt trashBtn"> Cancel order</div>
                     </>
                   ) : (
                     <span />

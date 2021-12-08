@@ -12,8 +12,19 @@
     color: blue;
   }
 
+  .sub-total {
+    border-top: 2px solid black;
+
+  }
+
+
   .grand-total {
     font-weight: bold;
-    // color: red;
+    border-top: 3px solid black;
   }
+
+  .grand-total-amt {
+    border-bottom: 3px double black;
+  }
+
 }

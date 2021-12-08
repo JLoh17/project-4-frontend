@@ -21,7 +21,6 @@ const categories = [
   }
 ]
 
-// TODO - filter by category
 const CompsCategorybar = (props) => {
   const handleClick = (catId) => {
     const { history: { push } } = props
