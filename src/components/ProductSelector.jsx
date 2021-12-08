@@ -32,7 +32,7 @@ const ProductSelector = ({ product, currentUser }) => {
         />
       </div>
       {
-            (!currentUser) && <div className="text-danger">Please Login or Register to add to your Cart</div>
+            (!currentUser) && <div className="text-danger">Please Login to add to Cart</div>
           }
       <div className="d-flex justify-content-between my-4">
         <AddToCart product={product} quantity={quantity} />

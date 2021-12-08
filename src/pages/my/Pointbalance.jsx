@@ -35,7 +35,7 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
           <Tr>
             <Th>Date</Th>
             <Th>Order Number</Th>
-            <Th>Net points gained/(loss)</Th>
+            <Th>Net points</Th>
           </Tr>
         </Thead>
         <Tbody>
