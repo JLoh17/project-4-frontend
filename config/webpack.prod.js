@@ -59,7 +59,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.API_DOMAIN': JSON.stringify('https://fth-back.herokuapp.com') // TODO
+      'process.env.API_DOMAIN': JSON.stringify('https://shoppulse-back.herokuapp.com/') // TODO
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/template.html'),
