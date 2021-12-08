@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import AddToCart from '@/components/AddtoCart'
 
 import { Button } from 'react-bootstrap'
 
-const ProductSelector = ({ product }) => {
+const ProductSelector = ({ product, currentUser }) => {
   const [quantity, setQuantity] = useState(1)
 
   const onChange = (e) => {
@@ -29,6 +31,9 @@ const ProductSelector = ({ product }) => {
           onChange={(onChange)}
         />
       </div>
+      {
+            (!currentUser) && <div className="text-danger">Please Login or Register to add to your Cart</div>
+          }
       <div className="d-flex justify-content-between my-4">
         <AddToCart product={product} quantity={quantity} />
         <Button variant="warning" className="btn ml-1">
@@ -43,7 +48,13 @@ const ProductSelector = ({ product }) => {
 }
 
 ProductSelector.propTypes = {
-  product: PropTypes.shape().isRequired
+  product: PropTypes.shape().isRequired,
+  currentUser: PropTypes.shape().isRequired
+
 }
 
-export default ProductSelector
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser.currentUser
+})
+
+export default connect(mapStateToProps, null)(ProductSelector)
