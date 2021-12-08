@@ -19,6 +19,8 @@ import ProductShow from '@/pages/ProductShow'
 
 import MyCart from '@/pages/my/Cart'
 import MyOrdersShow from '@/pages/my/orders/Show'
+
+import MyProfile from '@/pages/my/Profile'
 import MyPointBalance from '@/pages/my/Pointbalance'
 import MyOrdersIndex from '@/pages/my/orders/Index'
 import AdminOrders from '@/pages/admin/Orders'
@@ -62,7 +64,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/payment-success" component={PaymentSuccess} />
                 <PrivateRoute exact path="/payment-cancelled" component={PaymentCancelled} />
 
-                {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
+                <Route exact path="/my/profile" component={MyProfile} />
                 <PrivateRoute exact path="/my/pointbalance" component={MyPointBalance} />
                 {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
