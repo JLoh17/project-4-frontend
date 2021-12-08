@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { getMyProfile, updateMyProfile } from '@/actions/my/profile/profile'
 import MyProfileForm from '@/forms/profile-update'
+import { toast } from 'react-toastify'
 
 const MyProfile = ({ currentUserState: { currentUser }, ...props }) => {
   useEffect(() => {
@@ -12,10 +13,19 @@ const MyProfile = ({ currentUserState: { currentUser }, ...props }) => {
 
   const submitMyProfile = (values) => {
     const { history: { push } } = props
-
-    props.updateMyProfile(values).then(() => {
-      push('/my/profile')
+    props.updateMyProfile(values)
+    toast.success('Profile updated!', {
+      position: 'bottom-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
     })
+      .then(() => {
+        push('/my/profile')
+      })
   }
 
   if (!currentUser) return null

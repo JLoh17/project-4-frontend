@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 import { getCart } from '@/actions/my/cart/index'
 import { createMyOrder } from '@/actions/my/order/new'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 // import { createOrder } from '@/actions/my/orders/new'
 
@@ -126,18 +126,6 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
               </h6>
             </div>
 
-            <ToastContainer
-              position="bottom-left"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              limit={1}
-            />
           </>
         )
       }

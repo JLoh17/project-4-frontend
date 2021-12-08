@@ -4,6 +4,8 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMyProfile } from '@/actions/my/profile/profile'
 
+import { ToastContainer } from 'react-toastify'
+
 import PrivateRoute from '@/components/PrivateRouteUser'
 import AdminPrivateRoute from '@/components/PrivateRouteAdmin'
 
@@ -81,6 +83,7 @@ const App = (props) => {
             </div>
           )
         }
+      <ToastContainer />
     </Router>
   )
 }

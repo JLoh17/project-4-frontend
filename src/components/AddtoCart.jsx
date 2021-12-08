@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { createCartItem } from '@/actions/my/cart/new'
 
 import { Button } from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const AddToCart = ({ product, quantity, currentUser, ...props }) => {
   const [buttonDisable, setButtonDisable] = useState(false)
@@ -39,17 +39,6 @@ const AddToCart = ({ product, quantity, currentUser, ...props }) => {
         className="btn btn-block"
         onClick={() => buttonClick()}
       >Add to Cart</Button>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-      />
     </>
   )
 }
