@@ -36,7 +36,7 @@ const AdminIndex = ({ adminProductState: { adminProduct, meta, isLoading }, ...p
     setCreateProductModal(false)
   }
 
-  // TODO - how to refresh after delete, and delete images as well
+  // TODO - Delete images as well
   const deleteOrderClick = (id) => {
     props.deleteProduct(id)
   }

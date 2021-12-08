@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 import { getCart } from '@/actions/my/cart/index'
 
-// TODO - badge dissapears when item added to list
 const CompsBadge = ({ myCartState: { cart }, ...props }) => {
   useEffect(() => {
     props.getCart()

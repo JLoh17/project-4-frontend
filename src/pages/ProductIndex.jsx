@@ -9,7 +9,7 @@ import Loading from '@/components/Loading'
 import { getProductList } from '@/actions/product/index' // from Actions
 import Pagination from '@mui/material/Pagination'
 
-const ProductIndex = ({ productState: { cardList, meta, isLoading }, ...props }) => { // cardList is from the reducer
+const ProductIndex = ({ productState: { cardList, meta, isLoading }, history: { push }, ...props }) => { // cardList is from the reducer
   useEffect(() => {
     const query = qs.parse(props.location.search) // the query path
     props.getProductList(query) // from Actions - passing the query
@@ -21,20 +21,19 @@ const ProductIndex = ({ productState: { cardList, meta, isLoading }, ...props })
   }, [props.location.search]) // on update
 
   const productShow = (productId) => {
-    const { history: { push } } = props
     push(`/products/${productId}`)
   }
 
+  // Gets the page, as well as preventing going back to page 1 if on another page when refresh
   const getPage = (e, page) => {
-    props.getProductList({ page })
+    const query = { ...qs.parse(props.location.search), page }
+    push(`/products?${qs.stringify(query)}`)
   }
 
   if (cardList.length === 0) return null
 
   const { page } = meta
   const { totalPages } = meta
-
-  // TODO - to ask Denis (when less than 4 products the cards shrink in size from col
 
   if (isLoading) {
     return (
