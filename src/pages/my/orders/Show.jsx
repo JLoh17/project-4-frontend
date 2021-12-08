@@ -42,7 +42,7 @@ const MyOrdersShow = ({
   if (order.status === 'Pending Delivery' || order.status === 'Delivered' || order.status === 'Cancelled') {
     return (
       <div id="pages-orders-new" className="container p-3">
-        <h1 className="text-center">Order ID: {order.id}</h1>
+        <h1 className="text-center p-3">Order ID: {order.id}</h1>
         <div className="row mt-4">
           <div className="col-12 col-lg-6 mb-3">
             <SideOrderSummary />
@@ -65,7 +65,7 @@ const MyOrdersShow = ({
   if (order.status === 'Pending Payment') {
     return (
       <div id="pages-orders-new" className="container p-3">
-        <h1 className="text-center">Delivery details | Order ID: {order.id}</h1>
+        <h1 className="text-center p-3">Delivery details | Order ID: {order.id}</h1>
         <div className="row mt-4">
           <div className="col-12 col-lg-6 mb-3">
             <SideOrderSummary
@@ -91,7 +91,7 @@ const MyOrdersShow = ({
   }
 
   return (
-    <div id="pages-orders-new" className="container my-3">should never see this section</div>
+    <div id="pages-orders-new" className="container my-3">Congratulations, you found the secret page!</div>
   )
 }
 

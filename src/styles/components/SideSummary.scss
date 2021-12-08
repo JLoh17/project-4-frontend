@@ -9,7 +9,7 @@
 
   .points {
     font-weight: bold;
-    color: blue;
+    color: rgb(17, 155, 209);
   }
 
   .sub-total {
@@ -25,6 +25,11 @@
 
   .grand-total-amt {
     border-bottom: 3px double black;
+  }
+
+  .last-row {
+    border-top: none;
+
   }
 
 }

@@ -10,10 +10,12 @@
   cursor: pointer
 }
 
-.order-index:hover {
+.order-index:hover,
+.point-balance:hover {
   cursor: pointer;
-  background-color: rgba(248, 242, 242, 0.849);
+  background-color: rgba(238, 227, 227, 0.747);
 }
+
 
 .fa-trash-alt {
   color: red;
@@ -28,4 +30,8 @@
   border: 1px solid #ced4da;
   padding: 1rem;
   background: white
+}
+
+.fa-pied-piper-pp {
+  font-size: 25px;
 }

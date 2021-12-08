@@ -120,8 +120,10 @@ const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...p
               <Button variant="success" onClick={() => orderCreateSubmit()}>Confirm order</Button>
             </div>
 
-            <div className="d-flex justify-content-end">
-              <h6>Complete order to earn {(subTotal / 10).toFixed(0) } points</h6>
+            <div className="d-flex justify-content-end font-italic my-1">
+              <h6>Complete order to earn
+                <span className="mx-1 points">{(subTotal / 10).toFixed(0) }pp</span>
+              </h6>
             </div>
 
             <ToastContainer

@@ -101,7 +101,7 @@ class LayoutsNavbar extends React.Component {
                 </>
               )}
             >
-              <Dropdown.ItemText>Point bal: {currentUser.pointsBalance}</Dropdown.ItemText>
+              <Dropdown.ItemText>Point bal: {currentUser.pointsBalance.toLocaleString(undefined, { minimumFractionDigits: 0 })}</Dropdown.ItemText>
               <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to="/my/profile">Edit My Profile</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/orders">My Order History</NavDropdown.Item>

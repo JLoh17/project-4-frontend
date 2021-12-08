@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { getOrdersIndex, destroyMyOrder } from '@/actions/my/order/index'
 
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import Pagination from '@mui/material/Pagination'
 
-const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
+const MyOrdersIndex = ({ myOrdersIndexState: { listOrder, meta }, ...props }) => {
   useEffect(() => {
     props.getOrdersIndex()
   }, [])
@@ -18,6 +19,14 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
   const handleDeleteClick = (id) => {
     props.destroyMyOrder(id)
   }
+  const getPage = (e, page) => {
+    props.getOrdersIndex({ page })
+  }
+
+  if (listOrder.length === 0) return null
+
+  const { page } = meta
+  const { totalPages } = meta
 
   // If the remove button shows a blank page and only shows on refresh, it's because there's something missing in the reducer
   return (
@@ -38,7 +47,7 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
         <Tbody>
           {
             listOrder.map((order) => (
-              <Tr key={order.id} className="cursor-icon order-index">
+              <Tr key={order.id} className="order-index">
                 <Td onClick={() => orderShow(order.id)}>{order.id}</Td>
                 <Td onClick={() => orderShow(order.id)}>{order.createdAt.slice(0, 10)}</Td>
                 <Td onClick={() => orderShow(order.id)}>${(order.grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</Td>
@@ -60,6 +69,16 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder }, ...props }) => {
             }
         </Tbody>
       </Table>
+      <Pagination
+        className="d-flex justify-content-center p-3"
+        variant="outlined"
+        color="primary"
+        count={totalPages}
+        page={page}
+        showFirstButton="1" // jumps to first page
+        showLastButton="1" // jumps to last page
+        onChange={getPage}
+      />
     </div>
   )
 }

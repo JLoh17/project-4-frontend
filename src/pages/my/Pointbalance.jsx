@@ -10,6 +10,11 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
     props.getPointsIndex()
   }, [])
 
+  const orderShow = (OrderId) => {
+    const { history: { push } } = props
+    push(`/my/orders/${OrderId}`)
+  }
+
   const getPage = (e, page) => {
     props.getPointsIndex({ page })
   }
@@ -30,23 +35,23 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
           <Tr>
             <Th>Date</Th>
             <Th>Order Number</Th>
-            <Th>Net points gain/loss</Th>
+            <Th>Net points gained/(loss)</Th>
           </Tr>
         </Thead>
         <Tbody>
           {
         point.map((balance) => (
-          <Tr key={balance.id}>
-            <Td>{balance.createdAt.slice(0, 10)}</Td>
-            <Td>{balance.OrderId}</Td>
-            <Td>{balance.points}</Td>
+          <Tr key={balance.id} className="point-balance">
+            <Td onClick={() => orderShow(balance.OrderId)}>{balance.createdAt.slice(0, 10)}</Td>
+            <Td onClick={() => orderShow(balance.OrderId)}>{balance.OrderId}</Td>
+            <Td onClick={() => orderShow(balance.OrderId)}>{balance.points}</Td>
           </Tr>
         ))
         }
         </Tbody>
       </Table>
       <Pagination
-        className="d-flex justify-content-center"
+        className="d-flex justify-content-center p-3"
         variant="outlined"
         color="primary"
         count={totalPages}
@@ -62,7 +67,8 @@ const MyPointBalance = ({ myPointBalanceState: { point, meta }, currentUserState
 MyPointBalance.propTypes = {
   currentUserState: PropTypes.shape().isRequired,
   myPointBalanceState: PropTypes.shape().isRequired,
-  getPointsIndex: PropTypes.func.isRequired
+  getPointsIndex: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired
 
 }
 

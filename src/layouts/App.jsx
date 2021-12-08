@@ -4,6 +4,9 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMyProfile } from '@/actions/my/profile/profile'
 
+import PrivateRoute from '@/components/PrivateRouteUser'
+import AdminPrivateRoute from '@/components/PrivateRouteAdmin'
+
 import LayoutsNavbar from '@/components/Navbar'
 import Searchbar from '@/components/Searchbar'
 import CompsCategorybar from '@/components/Category'
@@ -51,20 +54,20 @@ const App = (props) => {
                 <Route exact path="/products" component={ProductIndex} />
                 <Route exact path="/products/:id" component={ProductShow} />
 
-                <Route exact path="/my/cart" component={MyCart} />
-                <Route exact path="/my/orders" component={MyOrdersIndex} />
-                <Route exact path="/my/orders/:id" component={MyOrdersShow} />
+                <PrivateRoute exact path="/my/cart" component={MyCart} />
+                <PrivateRoute exact path="/my/orders" component={MyOrdersIndex} />
+                <PrivateRoute exact path="/my/orders/:id" component={MyOrdersShow} />
                 {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
 
-                <Route exact path="/payment-success" component={PaymentSuccess} />
-                <Route exact path="/payment-cancelled" component={PaymentCancelled} />
+                <PrivateRoute exact path="/payment-success" component={PaymentSuccess} />
+                <PrivateRoute exact path="/payment-cancelled" component={PaymentCancelled} />
 
                 {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
-                <Route exact path="/my/pointbalance" component={MyPointBalance} />
+                <PrivateRoute exact path="/my/pointbalance" component={MyPointBalance} />
                 {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
 
-                <Route exact path="/admin/orders" component={AdminOrders} />
-                <Route exact path="/admin" component={AdminProducts} />
+                <AdminPrivateRoute exact path="/admin/orders" component={AdminOrders} />
+                <AdminPrivateRoute exact path="/admin" component={AdminProducts} />
 
                 <Route component={PagesNotFound} />
               </Switch>

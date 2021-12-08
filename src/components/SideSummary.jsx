@@ -14,6 +14,7 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
   const subTotal = (order.OrderProducts.reduce((prevSum, item) => (prevSum + (item.quantity * item.Product.price)), 0))
   const subTotalStr = subTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })
   const pointsUsed = ((subTotal / 10) - (order.points)).toFixed(0)
+  const pointsGained = (subTotal / 10).toFixed(0)
   const grandTotal = (order.grandTotal).toLocaleString(undefined, { minimumFractionDigits: 2 })
 
   if (pointsUsed == 0) {
@@ -29,7 +30,7 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
 
             {
               order.OrderProducts.map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <td>{(item.Product.productName)} - x{(item.quantity)}</td>
                   <td className="text-right">${(item.quantity * item.Product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                 </tr>
@@ -39,12 +40,19 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
               <td>Grand Total</td>
               <td className="text-right grand-total-amt">${grandTotal}</td>
             </tr>
+            <tr>
+              <td colSpan="2" className="text-right font-italic last-row">
+                <span className="text-right">Points gained: </span>
+                <span className="points">{pointsGained}pp</span>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     )
   }
 
+  // if points are used
   return (
     <div id="side-summary">
       <table className="table col-8">
@@ -57,7 +65,7 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
 
           {
               order.OrderProducts.map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <td>{(item.Product.productName)} - x{(item.quantity)}</td>
                   <td className="text-right">${(item.quantity * item.Product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                 </tr>
@@ -67,16 +75,22 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
             <td>Subtotal</td>
             <td className="text-right">${subTotalStr}</td>
           </tr>
-          <tr>
+          <tr className="font-italic">
             <td>
               <div>Less points used:</div>
               <div className="points">{pointsUsed}pp</div>
             </td>
-            <td className="text-right font-italic">-$({pointsUsed / 5}.00)</td>
+            <td className="text-right">$({pointsUsed / 5}.00)</td>
           </tr>
           <tr className="grand-total">
             <td>Grand Total</td>
             <td className="text-right grand-total-amt">${grandTotal}</td>
+          </tr>
+          <tr>
+            <td colSpan="2" className="text-right font-italic last-row">
+              <span>Points gained: </span>
+              <span className="points">{pointsGained}pp</span>
+            </td>
           </tr>
         </tbody>
       </table>
