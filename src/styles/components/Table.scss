@@ -1,8 +1,8 @@
 #admin-orders,
 #MyCart,
 #index-order,
-#point-balance {
-
+#point-balance,
+#admin-index {
 
 
   .responsiveTable {
@@ -15,8 +15,8 @@
     td {
       border-bottom: 2px solid rgb(211, 211, 211);
       padding: 0.8rem;
+      vertical-align: middle;
     }
-
   }
 
   .responsiveTable td .tdBefore {

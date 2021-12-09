@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { getAdminProductList, createProduct, deleteProduct } from '@/actions/admin/product'
 import Loading from '@/components/Loading'
 
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+
 import ModalsCreateProduct from '@/modals/createProduct'
 import Pagination from '@mui/material/Pagination'
 
@@ -71,16 +73,33 @@ const AdminIndex = ({ adminProductState: { adminProduct, meta, isLoading }, ...p
     <div id="admin-index" className="py-3 container text-center">
       <h1 className="py-3">Admin product page</h1>
       <button type="button" className="btn btn-primary mb-3" onClick={openCreateProductModal}>Create new product</button>
-      {
+
+      <Table className="table">
+        <Thead>
+          <Tr>
+            <Th>Product ID</Th>
+            <Th>Name</Th>
+            <Th>Price</Th>
+            <Th />
+          </Tr>
+        </Thead>
+
+        <Tbody>
+          {
           adminProduct.map((product) => (
-            <div className="d-flex justify-content-around text-format" key={product.id}>
-              <p className="mr-3 my-1" onClick={() => productShow(product.id)}>ProductID: {product.id}</p>
-              <p className="mr-3 my-1" onClick={() => productShow(product.id)}>Name: {product.productName}</p>
-              <p className="mr-3 my-1" onClick={() => productShow(product.id)}>Price: ${product.price}</p>
-              <p className="fas fa-trash-alt trashBtn my-2" onClick={() => deleteOrderClick(product.id)} />
-            </div>
+            <Tr className="text-format" key={product.id}>
+              <Td onClick={() => productShow(product.id)}>{product.id}</Td>
+              <Td onClick={() => productShow(product.id)}>{product.productName}</Td>
+              <Td onClick={() => productShow(product.id)}>{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Td>
+              <Td>
+                <div className="fas fa-trash-alt" onClick={() => deleteOrderClick(product.id)} />
+              </Td>
+            </Tr>
           ))
         }
+        </Tbody>
+      </Table>
+
       { createProductModal && <ModalsCreateProduct close={closeCreateProductModal} onSubmit={createProductSubmit} /> }
       <Pagination
         className="d-flex justify-content-center pt-3"
