@@ -9,6 +9,7 @@ module.exports = {
     vendor: ['react-bootstrap']
   },
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, '../public'),
     filename: '[name].[fullhash].js'
   },
