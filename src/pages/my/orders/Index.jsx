@@ -68,7 +68,7 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder, meta }, ...props }) =>
                       <div onClick={() => handleDeleteClick(order.id)} className="fas fa-trash-alt trashBtn"> Cancel order</div>
                     </>
                   ) : (
-                    <span />
+                    <div>Order is confirmed cannot be cancelled</div>
                   )
                 }
                 </Td>
