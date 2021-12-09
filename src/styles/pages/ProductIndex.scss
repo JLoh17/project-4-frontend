@@ -1,13 +1,21 @@
 #product-index {
   min-height: calc(100vh - 286px);
 
-
   .card {
     // padding: 1rem;
     width: 16rem;
     padding-left: none;
     padding-right: none;
     ;
+  }
+
+  .card-area {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-push {
+    flex-grow: 1;
   }
 
   .fa-heart {

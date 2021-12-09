@@ -15,10 +15,10 @@ const CarouselHome = ({ productState: { featured }, productShow, ...props }) => 
       <h3>Featured Products</h3>
       <Carousel cols={5} loop className="p-3">
         {featured.map((product) => (
-          <Carousel.Item key={product.id} className="">
+          <Carousel.Item key={product.id}>
             <div
-              className="card my-3 mx-auto cursor-icon"
-              style={{ width: '15rem' }}
+              className="card my-3 mx-auto cursor-icon "
+              style={{ width: '15rem', height: '26rem' }}
               onClick={() => productShow(product.id)}
             >
               <img src={product.Images?.[0]?.imageURL} className="card-img-top" alt="..." />

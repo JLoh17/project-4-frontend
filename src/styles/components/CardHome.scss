@@ -1,0 +1,10 @@
+#CardHome {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title {
+    flex-grow: 1;
+  }
+}

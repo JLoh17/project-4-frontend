@@ -67,12 +67,12 @@ const ProductIndex = ({ productState: { cardList, meta, isLoading }, currentUser
         <div className="row pb-3 my-auto">
           {
             cardList.map((product) => (
-              <Card className="col-6 col-md-4 col-lg-3 mx-auto" key={product.id}>
+              <Card className="mx-auto " key={product.id}>
                 <Card.Img variant="top" src={product.Images?.[0]?.imageURL} onClick={() => productShow(product.id)} className="cursor-icon" />
-                <Card.Body className="">
-                  <div>
+                <Card.Body className="card-area">
+                  <div className="card-push">
                     <div className="d-flex justify-content-between">
-                      <Card.Title onClick={() => productShow(product.id)} className="cursor-icon">{product.productName}</Card.Title>
+                      <Card.Title onClick={() => productShow(product.id)} className="cursor-icon card-push">{product.productName}</Card.Title>
                       <div className="far fa-heart" />
                     </div>
                   </div>
@@ -110,9 +110,9 @@ const ProductIndex = ({ productState: { cardList, meta, isLoading }, currentUser
             cardList.map((product) => (
               <Card className="col-6 col-md-4 col-lg-3 mx-auto" key={product.id}>
                 <Card.Img variant="top" src={product.Images?.[0]?.imageURL} onClick={() => productShow(product.id)} className="cursor-icon" />
-                <Card.Body>
-                  <div className="d-flex justify-content-between">
-                    <Card.Title onClick={() => productShow(product.id)} className="cursor-icon">{product.productName}</Card.Title>
+                <Card.Body className="card-area">
+                  <div className="d-flex justify-content-between card-push">
+                    <Card.Title onClick={() => productShow(product.id)} className="cursor-icon ">{product.productName}</Card.Title>
                     <div className="far fa-heart" />
                   </div>
                   <Card.Text>${(product.price.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</Card.Text>
