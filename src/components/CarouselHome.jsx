@@ -13,6 +13,7 @@ const CarouselHome = ({ productState: { featured }, productShow, ...props }) => 
   return (
     <div id="carousel-home">
       <h3>Featured Products</h3>
+      <h8>(Scroll left and right to see other featured products)</h8>
       <Carousel cols={5} loop className="p-3">
         {featured.map((product) => (
           <Carousel.Item key={product.id}>

@@ -67,7 +67,7 @@ const ProductIndex = ({ productState: { cardList, meta, isLoading }, currentUser
         <div className="row pb-3 my-auto">
           {
             cardList.map((product) => (
-              <Card className="mx-auto " key={product.id}>
+              <Card className="mx-auto col-6 col-md-4 col-lg-3" key={product.id}>
                 <Card.Img variant="top" src={product.Images?.[0]?.imageURL} onClick={() => productShow(product.id)} className="cursor-icon" />
                 <Card.Body className="card-area">
                   <div className="card-push">
