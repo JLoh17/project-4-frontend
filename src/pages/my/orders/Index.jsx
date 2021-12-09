@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getOrdersIndex, destroyMyOrder } from '@/actions/my/order/index'
+import { Link } from 'react-router-dom'
 
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import Pagination from '@mui/material/Pagination'
@@ -23,7 +24,15 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder, meta }, ...props }) =>
     props.getOrdersIndex({ page })
   }
 
-  if (listOrder.length === 0) return null
+  if (listOrder.length === 0) {
+    return (
+      <div id="index-order" className="orders-index container text-center p-3">
+        <h1 className="p-3">You currently have no orders!</h1>
+        <h6>All purchases will be logged at this page.</h6>
+        <Link to="/products">Click here to view products</Link>
+      </div>
+    )
+  }
 
   const { page } = meta
   const { totalPages } = meta
@@ -31,8 +40,8 @@ const MyOrdersIndex = ({ myOrdersIndexState: { listOrder, meta }, ...props }) =>
   // If the remove button shows a blank page and only shows on refresh, it's because there's something missing in the reducer
   return (
 
-    <div id="index-order" className="orders-index container text-center my-3">
-      <h1 className="my-3">Your orders</h1>
+    <div id="index-order" className="orders-index container text-center p-3">
+      <h1 className="p-3">Your orders</h1>
 
       <Table className="table">
         <Thead>
