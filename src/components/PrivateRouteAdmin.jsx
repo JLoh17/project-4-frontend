@@ -17,7 +17,8 @@ const AdminPrivateRoute = ({ component: Component, currentUserState: { currentUs
     })
   }
 
-  if (!currentUser.isAdmin) {
+  // you cannot just do !currentUser.isAdmin as this means null.admin
+  if (currentUser && !currentUser.isAdmin) {
     toast.error('You cannot access this page!', {
       position: 'bottom-right',
       autoClose: 2000,

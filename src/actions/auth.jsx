@@ -36,8 +36,8 @@ export const authLogout = () => (dispatch) => new Promise((resolve, reject) => {
     url: `${process.env.API_DOMAIN}/api/auth/logout`,
     withCredentials: true
   }).then((resp) => {
-    dispatch(unsetCurrentUser())
     resolve(resp)
+    dispatch(unsetCurrentUser())
   }).catch((err) => {
     reject(err)
   })
