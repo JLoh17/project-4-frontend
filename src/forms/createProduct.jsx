@@ -101,13 +101,13 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
 
     <div className="custom-control custom-checkbox form-group">
       <Field
-        id="isFeatured"
+        id="isFeature"
         className="custom-control-input"
-        name="isFeatured"
+        name="isFeature"
         type="checkbox"
       />
-      <label className="custom-control-label" htmlFor="isFeatured">Featured product</label>
-      <ErrorMessage component="div" className="invalid-feedback" name="isFeatured" />
+      <label className="custom-control-label" htmlFor="isFeature">Feature product</label>
+      <ErrorMessage component="div" className="invalid-feedback" name="isFeature" />
     </div>
 
     <div className="custom-control custom-checkbox form-group">
@@ -142,7 +142,7 @@ const createProductSchema = yup.object().shape({
   imageURL2: yup.string().notRequired(''),
   imageURL3: yup.string().notRequired(''),
   isNew: yup.boolean(),
-  isFeatured: yup.boolean(),
+  isFeature: yup.boolean(),
   isDisabled: yup.boolean()
 })
 

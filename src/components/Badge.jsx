@@ -13,6 +13,9 @@ const CompsBadge = ({ myCartState: { cart }, ...props }) => {
   if (!cart) return null
 
   if (cart.length === 0) return null
+
+  const subTotal = (cart.reduce((prevSum, item) => (prevSum + item.quantity), 0))
+
   return (
     <>
       <Badge variant="info" className="mx-1 badge"><span /> {cart.length} </Badge>
