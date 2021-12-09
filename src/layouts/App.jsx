@@ -25,6 +25,7 @@ import MyOrdersShow from '@/pages/my/orders/Show'
 import MyProfile from '@/pages/my/Profile'
 import MyPointBalance from '@/pages/my/Pointbalance'
 import MyOrdersIndex from '@/pages/my/orders/Index'
+import MyWishlist from '@/pages/my/Wishlist'
 import AdminOrders from '@/pages/admin/Orders'
 import AdminProducts from '@/pages/admin/Product'
 
@@ -68,7 +69,7 @@ const App = (props) => {
 
                 <Route exact path="/my/profile" component={MyProfile} />
                 <PrivateRoute exact path="/my/pointbalance" component={MyPointBalance} />
-                {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
+                <Route exact path="/my/wishlist" component={MyWishlist} />
 
                 <AdminPrivateRoute exact path="/admin/orders" component={AdminOrders} />
                 <AdminPrivateRoute exact path="/admin" component={AdminProducts} />
