@@ -19,12 +19,12 @@ const CardHome = ({ productState: { newProduct }, productShow, ...props }) => { 
             key={product.id}
           >
             <div
-              className="card cursor-icon"
+              className="card cursor-icon d-flex"
               onClick={() => productShow(product.id)}
             >
               <img src={product.Images?.[0]?.imageURL} className="card-img-top" alt="..." />
               <div className="card-body">
-                <h5 className="card-title">{product.productName}</h5>
+                <h5 className="card-title flex-column flex-grow-1">{product.productName}</h5>
                 <p className="card-text">${(product.price.toLocaleString(undefined, { minimumFractionDigits: 2 }))}</p>
               </div>
             </div>

@@ -15,7 +15,7 @@ const CarouselHome = ({ productState: { featured }, productShow, ...props }) => 
       <h3>Featured Products</h3>
       <Carousel cols={5} loop className="p-3">
         {featured.map((product) => (
-          <Carousel.Item key={product.id}>
+          <Carousel.Item key={product.id} className="">
             <div
               className="card my-3 mx-auto cursor-icon"
               style={{ width: '15rem' }}

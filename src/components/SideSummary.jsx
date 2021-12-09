@@ -80,7 +80,7 @@ const SideOrderSummary = ({ myOrderShowState: { order } }) => {
               <div>Less points used:</div>
               <div className="points">{pointsUsed}pp</div>
             </td>
-            <td className="text-right">$({pointsUsed / 5}.00)</td>
+            <td className="text-right">-$({(pointsUsed / 5).toLocaleString(undefined, { minimumFractionDigits: 2 })})</td>
           </tr>
           <tr className="grand-total">
             <td>Grand Total</td>

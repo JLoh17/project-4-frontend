@@ -8,16 +8,26 @@ import { connect } from 'react-redux'
 
 import { getCart } from '@/actions/my/cart/index'
 import { createMyOrder } from '@/actions/my/order/new'
+import Loading from '@/components/Loading'
+
 import { toast } from 'react-toastify'
 
 // import { createOrder } from '@/actions/my/orders/new'
 
-const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...props }) => {
+const MyCart = ({ myCartState: { cart, isLoading }, currentUserState: { currentUser }, ...props }) => {
   useEffect(() => {
     props.getCart()
   }, [])
 
   const [pointInput, setPointInput] = useState(0)
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
+  }
 
   if (!cart) return null
 
