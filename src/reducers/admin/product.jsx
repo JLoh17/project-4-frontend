@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
     }
     case ADD_PRODUCT_TO_ADMININDEX: {
       return produce(state, (draft) => {
-        draft.adminProduct.push(action.payload)
+        draft.adminProduct.unshift(action.payload)
       })
     }
     case REMOVE_PRODUCT: {
