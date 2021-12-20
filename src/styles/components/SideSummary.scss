@@ -1,15 +1,35 @@
 #side-summary {
+  // min-height: calc(100vh - 283px);
+
+
+
   table>thead>tr>th {
     border-top: none;
   }
 
   .points {
     font-weight: bold;
-    color: blue;
+    color: rgb(17, 155, 209);
   }
+
+  .sub-total {
+    border-top: 2px solid black;
+
+  }
+
 
   .grand-total {
     font-weight: bold;
-    // color: red;
+    border-top: 3px solid black;
   }
+
+  .grand-total-amt {
+    border-bottom: 3px double black;
+  }
+
+  .last-row {
+    border-top: none;
+
+  }
+
 }

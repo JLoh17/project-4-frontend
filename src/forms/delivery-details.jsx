@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
-// TODO - form submits on input??
 const RenderForm = ({ errors, touched, isSubmitting }) => (
   <Form>
     <div className="form-group">
       <label htmlFor="firstName">First Name</label>
       <Field
         id="firstName"
-        className={`form-control ${(errors.firstName && touched.firstName ? ' is-invalid' : '')}`}
-        name="firstName"
+        className={`form-control ${(errors.firstName && touched.firstName ? 'is-invalid' : '')}`}
+        name="firstName" // this links to the firstName from users if an initial value is found
         type="text"
       />
       <ErrorMessage component="div" className="invalid-feedback" name="firstName" />
@@ -21,7 +21,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="lastName">Last Name</label>
       <Field
         id="lastName"
-        className={`form-control ${(errors.lastName && touched.lastName ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.lastName && touched.lastName ? 'is-invalid' : '')}`}
         name="lastName"
         type="text"
       />
@@ -32,7 +32,7 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
       <label htmlFor="telephone">Telephone</label>
       <Field
         id="telephone"
-        className={`form-control ${(errors.telephone && touched.telephone ? ' is-invalid' : '')}`}
+        className={`form-control ${(errors.telephone && touched.telephone ? 'is-invalid' : '')}`}
         name="telephone"
         type="text"
       />
@@ -40,35 +40,22 @@ const RenderForm = ({ errors, touched, isSubmitting }) => (
     </div>
 
     <div className="form-group">
-      <label htmlFor="address">Address</label>
+      <label htmlFor="deliveryAddress">Address</label>
       <Field
-        id="address"
-        className={`form-control ${(errors.address && touched.address ? ' is-invalid' : '')}`}
-        name="address"
+        id="deliveryAddress"
+        className={`form-control ${(errors.deliveryAddress && touched.deliveryAddress ? 'is-invalid' : '')}`}
+        name="deliveryAddress"
         type="text"
         component="textarea"
         rows="3"
       />
-      <ErrorMessage component="div" className="invalid-feedback" name="address" />
+      <ErrorMessage component="div" className="invalid-feedback" name="deliveryAddress" />
     </div>
 
-    {/* Unsure if need default address */}
-    {/* <div className="custom-control custom-checkbox form-group">
-      <Field
-        id="saveAsDefaultAddress"
-        className="custom-control-input"
-        name="saveAsDefaultAddress"
-        type="checkbox"
-      />
-      <label className="custom-control-label" htmlFor="saveAsDefaultAddress">Save as default address</label>
-      <ErrorMessage component="div" className="invalid-feedback" name="saveAsDefaultAddress" />
-    </div> */}
-
-    <div>
-      <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Confirm Checkout</button>
-    </div>
+    <button className="btn btn-success col-6 float-right" type="submit" disabled={isSubmitting}>Proceed to payment
+      <Link to="/my/payment" />
+    </button>
   </Form>
-
 )
 
 RenderForm.propTypes = {
@@ -80,14 +67,13 @@ RenderForm.propTypes = {
 const deliveryDetailsSchema = yup.object().shape({
   firstName: yup.string().required('Field is Required'),
   lastName: yup.string().required('Field is Required'),
-  telephone: yup.string().required('Field is Required'),
-  address: yup.string().required('Field is Required'),
-  saveAsDefaultAddress: yup.boolean()
+  telephone: yup.number().required('Field is Required'),
+  deliveryAddress: yup.string().required('Field is Required')
 })
 
 const FormsDeliveryDetails = ({ initialValues, onSubmit }) => (
   <Formik
-    initialValues={initialValues}
+    initialValues={initialValues} // the initial values in the form.
     validationSchema={deliveryDetailsSchema}
     onSubmit={onSubmit}
     component={RenderForm}

@@ -1,140 +1,158 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
-import Form from 'react-bootstrap/Form'
-import Image from 'react-bootstrap/Image'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { propTypes } from 'react-grid-carousel'
+import CartTable from '@/components/CartTable'
+import { Link } from 'react-router-dom'
 
-// TODO - shift this page to cart component
-const MyCart = () => {
-  const [input, setInput] = useState('')
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-  // TODO - change 100 to point balance and console log to something else
-  const onChange = (e) => {
-    if (Number(e.target.value) > 100) { return console.log('more than 100') } // Limits the input to 100
-    setInput(e.target.value)
+import { getCart } from '@/actions/my/cart/index'
+import { createMyOrder } from '@/actions/my/order/new'
+
+import { toast } from 'react-toastify'
+
+// import { createOrder } from '@/actions/my/orders/new'
+
+const MyCart = ({ myCartState: { cart }, currentUserState: { currentUser }, ...props }) => {
+  useEffect(() => {
+    props.getCart()
+  }, [])
+
+  const [pointInput, setPointInput] = useState(0)
+
+  if (!cart) return null
+
+  // Calc Sub and Total
+  const subTotal = cart.reduce((prevSum, item) => (prevSum + (item.Product.price * item.quantity)), 0)
+  const subTotalStr = subTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })
+  const pointsAsMoney = (pointInput / 5)
+  const total = (subTotal - pointsAsMoney)
+  const totalStr = total.toLocaleString(undefined, { minimumFractionDigits: 2 })
+
+  // Toastify ID for unique toast
+  // In order to prevent toastify from showing multiple toasts onclick, set an ID to ensure it only happens once
+  const toastifyId = 'randomId'
+  const toastifyId2 = 'randomId2'
+
+  const orderCreateSubmit = () => {
+    const { history: { push } } = props
+    const values = {
+      points: ((subTotal / 10) - pointInput).toFixed(0),
+      grandTotal: total
+    }
+    props.createMyOrder(values).then((resp) => {
+      push(`/my/orders/${resp.data.myOrder.id}`)
+    })
   }
 
-  const TestOrders = [
-    {
-      id: '1',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/16493/LOG_MXMASTER3_BLK_main_53009919_20201029171358_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '100' }
-    }, {
-      id: '2',
-      imageURL: 'https://images.hktv-img.com/images/HKTV/12752/339481_main_74712191_20211005152223_01_1200.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '200' }
-    }, {
-      id: '3',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_blue.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '300' }
-    }, {
-      id: '4',
-      imageURL: 'https://shop.theclub.com.hk/media/catalog/product/cache/2fcb0be76f5f36e732067d937460935a/i/p/iphone13mini_midnight.jpg',
-      quantity: '1',
-      product:
-        { productName: 'some title',
-          price: '400' }
+  const pointsOnChange = (e) => {
+    const value = Number(e.target.value)
+
+    if (value > subTotal) {
+      return toast.error('Points used cannot exceed subtotal', {
+        toastId: toastifyId2,
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
     }
-  ]
+
+    if (value > currentUser.pointsBalance) {
+      return toast.error('You have no more points', {
+        toastId: toastifyId,
+        position: 'bottom-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      })
+    }
+
+    setPointInput(e.target.value)
+  }
 
   return (
-    <div id="MyCart" className="my-3 container text-center">
-      <h1 className="my-3">My Cart</h1>
-      <Table class="table">
-        <Thead>
-          <Tr>
-            <Th>Image</Th>
-            <Th>Product name</Th>
-            <Th>Price</Th>
-            <Th>Qty</Th>
-            <Th>Subtotal</Th>
-            <Th />
-          </Tr>
-        </Thead>
-        <Tbody>
-          {
-            // TODO - map from actual data
-            TestOrders.map((order) => (
-              <Tr key={order.id}>
-                <Td><Image src={order.imageURL} className="pic-resize" />{order.src}</Td>
-                <Td>{order.product.productName}</Td>
-                <Td>${order.product.price}</Td>
-                <Td>
-                  <Form.Control as="select" aria-label="status" name="status" onChange>
-                    <option
-                      defaultChecked
-                      value="1"
-                    >1</option>
-                    <option
-                      value="2"
-                    >2</option>
-                    <option
-                      value="3"
-                    >3</option>
-                  </Form.Control>
-                </Td>
-                <Td>${order.product.price * order.quantity}</Td>
-                <Td>
-                  <div className="fas fa-trash-alt trashBtn" onClick> Remove</div>
-                </Td>
+    <div id="MyCart" className="py-3 container text-center">
+      <h1 className="py-3">My Cart</h1>
 
-              </Tr>
-            ))
-            }
-        </Tbody>
-      </Table>
-      <div className="d-flex justify-content-end my-3">
-        <h4>Subtotal:</h4>
-        <h4>$1,000</h4>
-      </div>
-      <div className="d-flex justify-content-end my-3">
-        <div>
-          <h6>Less points used: &nbsp;</h6>
-          <input
-            value={input}
-            type="number"
-            id="points-used"
-            name="points"
-            step="5" // points go up in steps of 5
-            min="0" // minimum input is 0 to prevent negative number
-            onChange={onChange}
-          />
-        </div>
+      {
+        (cart.length === 0) ? (
+          <div className="my-3 text-center">
+            <div> Your shopping cart is currently empty.</div>
+            <div> <Link to="/products"> View Products </Link></div>
+          </div>
+        ) : (
+          <>
+            <CartTable />
+            <div className="d-flex justify-content-end my-3">
+              <h4>Subtotal:</h4>
+              {/* Check whether the info provided back is an object or an array, in this case Cart is an array */}
+              <h4>${subTotalStr}</h4>
+            </div>
+            <div className="d-flex justify-content-end my-3">
+              <div>
+                <h6>Less points used: &nbsp;</h6>
+                <input
+                  value={pointInput}
+                  type="number"
+                  id="points-used"
+                  name="points"
+                  step="5" // points go up in steps of 5
+                  min="0" // minimum input is 0 to prevent negative number
+                  onChange={(e) => pointsOnChange(e, cart.id)}
+                />
+              </div>
 
-        <h6 className="align-middle">$({input / 5})</h6>
-      </div>
+              <h6 className="align-middle">${pointsAsMoney}</h6>
+            </div>
 
-      <div className="d-flex justify-content-end my-3">
-        <h4>Total:</h4>
-        <h4>$900</h4>
-      </div>
+            <div className="d-flex justify-content-end my-3">
+              <h4>Total:</h4>
+              <h4>${totalStr}</h4>
+            </div>
 
-      <div className="d-flex justify-content-end mt-1">
-        <Link to="/my/delivery">
-          <Button variant="success">Confirm order</Button>
-        </Link>
-      </div>
+            <div className="d-flex justify-content-end mt-1">
+              <Button variant="success" onClick={() => orderCreateSubmit()}>Confirm order</Button>
+            </div>
 
-      <div className="d-flex justify-content-end">
-        <h6>Complete order to earn XXXX points</h6>
-      </div>
+            <div className="d-flex justify-content-end font-italic my-1">
+              <h6>Complete order to earn
+                <span className="mx-1 points">{(subTotal / 10).toFixed(0) }pp</span>
+              </h6>
+            </div>
+
+          </>
+        )
+      }
 
     </div>
-  // TODO - Total should be a formula of: subtotal - {value}
-  // TODO - "Complete order to earn XXXX points" must be linked to subtotal
-
   )
 }
 
-export default MyCart
+MyCart.propTypes = {
+  currentUserState: PropTypes.shape().isRequired,
+  myCartState: PropTypes.shape().isRequired,
+  getCart: PropTypes.func.isRequired,
+
+  createMyOrder: PropTypes.func.isRequired,
+  history: PropTypes.shape().isRequired
+
+}
+
+const mapStateToProps = (state) => ({
+  currentUserState: state.currentUser,
+  myCartState: state.myCartState
+})
+
+const mapDispatchToProps = {
+  getCart,
+  createMyOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyCart)

@@ -1,24 +1,52 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router'
+
 import Nav from 'react-bootstrap/Nav'
 
-const CompsCategorybar = () => (
-  <div id="categorybar">
-    <Nav className="container-fluid  flex-column flex-lg-row ">
-      <Nav.Item>
-        <Nav.Link as={NavLink} to="/products">Electronics</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={NavLink} to="/products">Sports & Lifestyle</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={NavLink} to="/products">Household</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link as={NavLink} to="/products">Toys & Games</Nav.Link>
-      </Nav.Item>
-    </Nav>
-  </div>
-)
+const categories = [
+  {
+    id: '1',
+    name: 'Electronics'
+  }, {
+    id: '2',
+    name: 'Sports & Lifestyle'
+  }, {
+    id: '3',
+    name: 'Household'
+  }, {
+    id: '4',
+    name: 'Toys & Games'
+  }
+]
 
-export default CompsCategorybar
+const CompsCategorybar = (props) => {
+  const handleClick = (catId) => {
+    const { history: { push } } = props
+    push(`/products?catName=${catId}`)
+  }
+
+  return (
+    <div id="categorybar">
+      <Nav className="container-fluid  flex-column flex-lg-row ">
+        <Nav.Item>
+          <Nav.Link as={NavLink} to="/products">All Categories</Nav.Link>
+        </Nav.Item>
+        {
+          categories.map((cat) => (
+            <Nav.Item key={cat.id}>
+              <Nav.Link onClick={() => handleClick(cat.id)}>{cat.name}</Nav.Link>
+            </Nav.Item>
+          ))
+        }
+      </Nav>
+    </div>
+  )
+}
+
+CompsCategorybar.propTypes = {
+  history: PropTypes.shape().isRequired // productState is connected to Root
+}
+
+export default withRouter(CompsCategorybar)

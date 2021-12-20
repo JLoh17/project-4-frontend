@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getMyProfile } from '@/actions/my/profile'
+import { getMyProfile } from '@/actions/my/profile/profile'
+
+import { ToastContainer } from 'react-toastify'
+
+import PrivateRoute from '@/components/PrivateRouteUser'
+import AdminPrivateRoute from '@/components/PrivateRouteAdmin'
 
 import LayoutsNavbar from '@/components/Navbar'
 import Searchbar from '@/components/Searchbar'
@@ -15,10 +20,17 @@ import ProductIndex from '@/pages/ProductIndex'
 import ProductShow from '@/pages/ProductShow'
 
 import MyCart from '@/pages/my/Cart'
-import MyOrdersNew from '@/pages/my/orders/New'
+import MyOrdersShow from '@/pages/my/orders/Show'
+
+import MyProfile from '@/pages/my/Profile'
 import MyPointBalance from '@/pages/my/Pointbalance'
 import MyOrdersIndex from '@/pages/my/orders/Index'
+import MyWishlist from '@/pages/my/Wishlist'
 import AdminOrders from '@/pages/admin/Orders'
+import AdminProducts from '@/pages/admin/Product'
+
+import PaymentSuccess from '@/pages/stripe/Success'
+import PaymentCancelled from '@/pages/stripe/Cancel'
 
 import PagesNotFound from '@/pages/NotFound'
 
@@ -33,42 +45,46 @@ const App = (props) => {
   return (
     <Router>
       {
-        loaded ? (
-          <>
-            <LayoutsNavbar />
-            {/* temporary fix; to merge searchbar and categorybar together */}
-            <div className="sticky-top stickybar">
-              <Searchbar />
-              <CompsCategorybar />
+          loaded ? (
+            <>
+              <LayoutsNavbar />
+              {/* temporary fix; to merge searchbar and categorybar together */}
+              <div className="sticky-top stickybar">
+                <Searchbar />
+                <CompsCategorybar />
+              </div>
+              <Switch>
+                <Route exact path="/" component={PagesHome} />
+
+                <Route exact path="/products" component={ProductIndex} />
+                <Route exact path="/products/:id" component={ProductShow} />
+
+                <PrivateRoute exact path="/my/cart" component={MyCart} />
+                <PrivateRoute exact path="/my/orders" component={MyOrdersIndex} />
+                <PrivateRoute exact path="/my/orders/:id" component={MyOrdersShow} />
+                {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
+
+                <PrivateRoute exact path="/payment-success" component={PaymentSuccess} />
+                <PrivateRoute exact path="/payment-cancelled" component={PaymentCancelled} />
+
+                <Route exact path="/my/profile" component={MyProfile} />
+                <PrivateRoute exact path="/my/pointbalance" component={MyPointBalance} />
+                <Route exact path="/my/wishlist" component={MyWishlist} />
+
+                <AdminPrivateRoute exact path="/admin/orders" component={AdminOrders} />
+                <AdminPrivateRoute exact path="/admin" component={AdminProducts} />
+
+                <Route component={PagesNotFound} />
+              </Switch>
+              <CompsFooter />
+            </>
+          ) : (
+            <div className="container my-3">
+              <CompLoading />
             </div>
-            <Switch>
-              <Route exact path="/" component={PagesHome} />
-
-              <Route exact path="/products" component={ProductIndex} />
-              <Route exact path="/products/:id" component={ProductShow} />
-
-              <Route exact path="/my/cart" component={MyCart} />
-              <Route exact path="/my/orders" component={MyOrdersIndex} />
-              <Route exact path="/my/delivery" component={MyOrdersNew} />
-              {/* <Route exact path="/my/orders/payment" component={MyOrdersShow} /> // Payment */}
-
-              {/* <Route exact path="/my/profile" component={MyProfile} /> // MyProfile */}
-              <Route exact path="/my/pointbalance" component={MyPointBalance} />
-              {/* <Route exact path="/my/wishlist" component={MyWishlist} /> // MyWishlist */}
-
-              <Route exact path="/admin/orders" component={AdminOrders} />
-              {/* <Route exact path="/admin" component={AdminIndex} /> // AdminIndex */}
-
-              <Route component={PagesNotFound} />
-            </Switch>
-            <CompsFooter />
-          </>
-        ) : (
-          <div className="container my-3">
-            <CompLoading />
-          </div>
-        )
-      }
+          )
+        }
+      <ToastContainer />
     </Router>
   )
 }

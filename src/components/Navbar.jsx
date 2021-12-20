@@ -6,9 +6,12 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import { authSignup, authLogin, authLogout } from '@/actions/auth'
+
 import ModalsRegister from '@/modals/register'
 import ModalsLogin from '@/modals/login'
 import Dropdown from 'react-bootstrap/Dropdown'
+
+import CompsBadge from '@/components/Badge'
 
 import logo from '@/assets/logo.png'
 
@@ -75,7 +78,7 @@ class LayoutsNavbar extends React.Component {
           <Nav className="ml-auto">
             <NavDropdown alignRight title={<span><i className="fas fa-user-check mx-1" />My Admin Profile</span>}>
               <NavDropdown.Item as={NavLink} to="/admin/orders">Admin Orders</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/admin/index">Create/edit product</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/admin">Create/edit product</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={this.handleLogoutClick} eventKey="5">Logout</NavDropdown.Item>
             </NavDropdown>
@@ -84,7 +87,6 @@ class LayoutsNavbar extends React.Component {
       )
     }
 
-    // TODO point balance
     // if a User (non-admin) is logged in
     if (currentUser) {
       return (
@@ -99,7 +101,7 @@ class LayoutsNavbar extends React.Component {
                 </>
               )}
             >
-              <Dropdown.ItemText>Point bal: 10,000</Dropdown.ItemText>
+              <Dropdown.ItemText>Point bal: {currentUser.pointsBalance.toLocaleString(undefined, { minimumFractionDigits: 0 })}</Dropdown.ItemText>
               <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to="/my/profile">Edit My Profile</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/my/orders">My Order History</NavDropdown.Item>
@@ -111,7 +113,7 @@ class LayoutsNavbar extends React.Component {
 
             <Nav.Link as={NavLink} to="/my/cart" eventKey="3" className="my-auto">
               <span className="fas fa-shopping-cart" /> My Cart
-              {/* <CartBadge /> */}
+              <CompsBadge />
             </Nav.Link>
           </Nav>
         </>
@@ -159,10 +161,13 @@ LayoutsNavbar.propTypes = {
   authLogout: PropTypes.func.isRequired,
   authSignup: PropTypes.func.isRequired,
   authLogin: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = (state) => ({
-  currentUserState: state.currentUser
+  currentUserState: state.currentUser,
+  myCartState: state.myCartState
+
 })
 
 const mapDispatchToProps = {

@@ -9,6 +9,7 @@ module.exports = {
     vendor: ['react-bootstrap']
   },
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, '../public'),
     filename: '[name].[fullhash].js'
   },
@@ -35,7 +36,14 @@ module.exports = {
         ]
       }, {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-        loader: 'url-loader?limit=100000'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 100000
+            }
+          }
+        ]
       }
     ]
   },
@@ -59,7 +67,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.API_DOMAIN': JSON.stringify('https://fth-back.herokuapp.com') // TODO
+      'process.env.API_DOMAIN': JSON.stringify('https://shoppulse-back.herokuapp.com')
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/template.html'),

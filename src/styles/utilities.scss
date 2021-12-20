@@ -1,10 +1,13 @@
-.click-disabled {
-  pointer-events: none;
+.cursor-icon {
+  cursor: pointer
 }
 
-.click-auto {
-  pointer-events: auto;
+.order-index:hover,
+.point-balance:hover {
+  cursor: pointer;
+  background-color: rgba(238, 227, 227, 0.747);
 }
+
 
 .fa-trash-alt {
   color: red;
@@ -13,4 +16,14 @@
 .fa-trash-alt:hover,
 .fa-clone:hover {
   cursor: pointer;
+}
+
+.card-info {
+  border: 1px solid #ced4da;
+  padding: 1rem;
+  background: white
+}
+
+.fa-pied-piper-pp {
+  font-size: 25px;
 }

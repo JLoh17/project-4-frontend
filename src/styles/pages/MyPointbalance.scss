@@ -1,0 +1,14 @@
+#point-balance {
+  min-height: calc(100vh - 279px);
+
+  tr>th {
+    border-top: 2px solid lightgray;
+  }
+
+  tr>td {
+    border-top: 0.1px solid lightgray;
+    border-bottom: 0.1px solid lightgray;
+    ;
+  }
+
+}
